@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="广阔天地，大有作为  VIM，素有编辑器之神的美名，缘于其强大的功能和众多高效的插件。今天我们来看看如何进行简单的配置来提高PHP开发及调试的效率。 使用场景笔者在开发和测试过程当中，自己或者QA同学都会遇到因为遗漏某个括号，或者分号这种小的语法错误导致工作效率降低，特别是在测试或者是预上线环境，所以本文提供了一个在编辑退出时自动检查语法错误的工具，提高开发测试效率。 配置插件将下面这段代码添加至">
+<meta name="description" content="VIM，素有编辑器之神的美名，缘于其强大的功能和众多高效的插件。今天我们来看看如何进行简单的配置来提高PHP开发及调试的效率。 使用场景笔者在开发和测试过程当中，自己或者QA同学都会遇到因为遗漏某个括号，或者分号这种小的语法错误导致工作效率降低，特别是在测试或者是预上线环境，所以本文提供了一个在编辑退出时自动检查语法错误的工具，提高开发测试效率。 配置插件将下面这段代码添加至yourname.vi">
 <meta name="keywords" content="VIM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VIM 配置PHP错误检查">
 <meta property="og:url" content="http://jixianma.com/2017/12/13/vimchecker_php/index.html">
 <meta property="og:site_name" content="赤乌_Run的博客">
-<meta property="og:description" content="广阔天地，大有作为  VIM，素有编辑器之神的美名，缘于其强大的功能和众多高效的插件。今天我们来看看如何进行简单的配置来提高PHP开发及调试的效率。 使用场景笔者在开发和测试过程当中，自己或者QA同学都会遇到因为遗漏某个括号，或者分号这种小的语法错误导致工作效率降低，特别是在测试或者是预上线环境，所以本文提供了一个在编辑退出时自动检查语法错误的工具，提高开发测试效率。 配置插件将下面这段代码添加至">
+<meta property="og:description" content="VIM，素有编辑器之神的美名，缘于其强大的功能和众多高效的插件。今天我们来看看如何进行简单的配置来提高PHP开发及调试的效率。 使用场景笔者在开发和测试过程当中，自己或者QA同学都会遇到因为遗漏某个括号，或者分号这种小的语法错误导致工作效率降低，特别是在测试或者是预上线环境，所以本文提供了一个在编辑退出时自动检查语法错误的工具，提高开发测试效率。 配置插件将下面这段代码添加至yourname.vi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-13T12:57:25.000Z">
+<meta property="og:updated_time" content="2017-12-18T12:44:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VIM 配置PHP错误检查">
-<meta name="twitter:description" content="广阔天地，大有作为  VIM，素有编辑器之神的美名，缘于其强大的功能和众多高效的插件。今天我们来看看如何进行简单的配置来提高PHP开发及调试的效率。 使用场景笔者在开发和测试过程当中，自己或者QA同学都会遇到因为遗漏某个括号，或者分号这种小的语法错误导致工作效率降低，特别是在测试或者是预上线环境，所以本文提供了一个在编辑退出时自动检查语法错误的工具，提高开发测试效率。 配置插件将下面这段代码添加至">
+<meta name="twitter:description" content="VIM，素有编辑器之神的美名，缘于其强大的功能和众多高效的插件。今天我们来看看如何进行简单的配置来提高PHP开发及调试的效率。 使用场景笔者在开发和测试过程当中，自己或者QA同学都会遇到因为遗漏某个括号，或者分号这种小的语法错误导致工作效率降低，特别是在测试或者是预上线环境，所以本文提供了一个在编辑退出时自动检查语法错误的工具，提高开发测试效率。 配置插件将下面这段代码添加至yourname.vi">
 
 
 
@@ -340,9 +340,7 @@
       
 
       
-        <blockquote class="blockquote-center">广阔天地，大有作为</blockquote>
-
-<p>VIM，素有编辑器之神的美名，缘于其强大的功能和众多高效的插件。今天我们来看看如何进行简单的配置来提高PHP开发及调试的效率。</p>
+        <p>VIM，素有编辑器之神的美名，缘于其强大的功能和众多高效的插件。今天我们来看看如何进行简单的配置来提高PHP开发及调试的效率。</p>
 <h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>笔者在开发和测试过程当中，自己或者QA同学都会遇到因为遗漏某个括号，或者分号这种小的语法错误导致工作效率降低，特别是在测试或者是预上线环境，所以本文提供了一个在编辑退出时自动检查语法错误的工具，提高开发测试效率。</p>
 <h2 id="配置插件"><a href="#配置插件" class="headerlink" title="配置插件"></a>配置插件</h2><p>将下面这段代码添加至yourname.vim 文件中，并将该文件移至 ~/.vim/plugin 文件下即可</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">autocmd BufWritePost *.php call PHPSyntaxCheck()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> !exists(<span class="string">'g:PHP_SYNTAX_CHECK_BIN'</span>)</span><br><span class="line">    <span class="built_in">let</span> g:PHP_SYNTAX_CHECK_BIN = <span class="string">'php'</span></span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span>! PHPSyntaxCheck()</span><br><span class="line">    <span class="built_in">let</span> result = system(g:PHP_SYNTAX_CHECK_BIN.<span class="string">' -l -n '</span>.expand(<span class="string">'%'</span>))</span><br><span class="line">    <span class="keyword">if</span> (stridx(result, <span class="string">'No syntax errors detected'</span>) == -1)</span><br><span class="line">        echohl WarningMsg | <span class="built_in">echo</span> result | echohl None</span><br><span class="line">    endif</span><br><span class="line">endfunction</span><br></pre></td></tr></table></figure>
@@ -376,15 +374,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/12/13/Golang_first/" rel="next" title="Golang 基础知识">
+                <i class="fa fa-chevron-left"></i> Golang 基础知识
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/13/Golang_first/" rel="prev" title="Golang 基础知识">
-                Golang 基础知识 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
