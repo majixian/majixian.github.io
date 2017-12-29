@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Lnmp," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="首先介绍一下LNMP环境，LNMP即 Linux+Nginx+MySql+Php 组建的一套成熟完善的Web环境。本文总结了LNMP环境搭建的方法步骤以及过程当中可能遇到到问题。 目标安装环境如下：Linux  &amp;nbsp;&amp;nbsp;CentOS 6.8Nginx  &amp;nbsp;&amp;nbsp;1.10.2MySql  &amp;nbsp;&amp;nbsp;5.6PHP    &amp;nbsp;&amp;nbsp; &amp;nbsp">
+<meta name="keywords" content="Lnmp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LNMP 环境搭建">
+<meta property="og:url" content="http://jixianma.com/2017/12/10/LNMP/index.html">
+<meta property="og:site_name" content="赤乌_Run的博客">
+<meta property="og:description" content="首先介绍一下LNMP环境，LNMP即 Linux+Nginx+MySql+Php 组建的一套成熟完善的Web环境。本文总结了LNMP环境搭建的方法步骤以及过程当中可能遇到到问题。 目标安装环境如下：Linux  &amp;nbsp;&amp;nbsp;CentOS 6.8Nginx  &amp;nbsp;&amp;nbsp;1.10.2MySql  &amp;nbsp;&amp;nbsp;5.6PHP    &amp;nbsp;&amp;nbsp; &amp;nbsp">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-29T08:41:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LNMP 环境搭建">
+<meta name="twitter:description" content="首先介绍一下LNMP环境，LNMP即 Linux+Nginx+MySql+Php 组建的一套成熟完善的Web环境。本文总结了LNMP环境搭建的方法步骤以及过程当中可能遇到到问题。 目标安装环境如下：Linux  &amp;nbsp;&amp;nbsp;CentOS 6.8Nginx  &amp;nbsp;&amp;nbsp;1.10.2MySql  &amp;nbsp;&amp;nbsp;5.6PHP    &amp;nbsp;&amp;nbsp; &amp;nbsp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jixianma.com/2017/12/10/LNMP/"/>
+
+
+
+
+
+  <title>LNMP 环境搭建 | 赤乌_Run的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">赤乌_Run的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于作者
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jixianma.com/2017/12/10/LNMP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赤乌_Rsun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赤乌_Run的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LNMP 环境搭建</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-10T10:27:47+08:00">
+                2017-12-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/10/LNMP/" class="leancloud_visitors" data-flag-title="LNMP 环境搭建">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>首先介绍一下<code>LNMP</code>环境，<code>LNMP</code>即 <code>Linux+Nginx+MySql+Php</code> 组建的一套成熟完善的Web环境。本文总结了<code>LNMP</code>环境搭建的方法步骤以及过程当中可能遇到到问题。</p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>安装环境如下：<br>Linux  &nbsp;&nbsp;CentOS 6.8<br>Nginx  &nbsp;&nbsp;1.10.2<br>MySql  &nbsp;&nbsp;5.6<br>PHP    &nbsp;&nbsp; &nbsp;&nbsp;5.5.38</p>
+<p>成功安装<code>LNMP</code>环境到<code>/usr/local/lnmp</code></p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="本地目录创建"><a href="#本地目录创建" class="headerlink" title="本地目录创建"></a>本地目录创建</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir /usr/<span class="built_in">local</span>/lnmp </span><br><span class="line">mkdir /usr/<span class="built_in">local</span>/lnmp/mysql5.6</span><br><span class="line">mkdir /usr/<span class="built_in">local</span>/lnmp/nginx1.10.2</span><br><span class="line">mkdir /usr/<span class="built_in">local</span>/lnmp/php5.5.38</span><br><span class="line">mkdir /usr/<span class="built_in">local</span>/<span class="built_in">source</span> <span class="comment">#源码存放目录</span></span><br></pre></td></tr></table></figure>
+<h3 id="源码准备"><a href="#源码准备" class="headerlink" title="源码准备"></a>源码准备</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/<span class="built_in">source</span></span><br><span class="line">wget http://am1.php.net/get/php-5.5.38.tar.gz/from/this/mirror&amp;&amp; mv mirror php-5.5.38.tar.gz </span><br><span class="line">wget http://nginx.org/download/nginx-1.10.2.tar.gz</span><br><span class="line">wget https://github.com/mysql/mysql-server/archive/mysql-5.5.56.tar.gz</span><br></pre></td></tr></table></figure>
+<h2 id="PHP-安装"><a href="#PHP-安装" class="headerlink" title="PHP 安装"></a>PHP 安装</h2><h3 id="解压安装包"><a href="#解压安装包" class="headerlink" title="解压安装包"></a>解压安装包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/<span class="built_in">source</span></span><br><span class="line">tar -zxvf php-5.5.38.tar.gz &amp;&amp; <span class="built_in">cd</span> php-5.5.38</span><br></pre></td></tr></table></figure>
+<h3 id="编译-amp-安装"><a href="#编译-amp-安装" class="headerlink" title="编译&amp;安装"></a>编译&amp;安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#配置编译选项</span></span><br><span class="line">./configure \</span><br><span class="line">--prefix=/usr/<span class="built_in">local</span>/lnmp/php5.5.38 \</span><br><span class="line">--<span class="built_in">enable</span>-fpm \</span><br><span class="line">--with-zlib-dir=/usr/share/doc/zlib-1.2.11 \</span><br><span class="line">--<span class="built_in">enable</span>-mbstring \</span><br><span class="line">--with-openssl-dir=/usr/share/doc/openssl-1.0.2d \ </span><br><span class="line">--with-mysql --with-mysqli \</span><br><span class="line">--with-mysql-sock \</span><br><span class="line">--with-jpeg-dir=/usr/lib \</span><br><span class="line">--<span class="built_in">enable</span>-gd-native-ttf \</span><br><span class="line">--<span class="built_in">enable</span>-pdo --with-pdo-mysql \</span><br><span class="line">--with-gettext --with-pdo-mysql \</span><br><span class="line">--with-curl=/usr/share/doc/curl-7.19.7 \</span><br><span class="line">--<span class="built_in">enable</span>-sockets --<span class="built_in">enable</span>-bcmath --<span class="built_in">enable</span>-xml \</span><br><span class="line">--with-bz2 --<span class="built_in">enable</span>-zip --<span class="built_in">enable</span>-freetype</span><br><span class="line"></span><br><span class="line"><span class="comment">#编译&amp;&amp;安装</span></span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line"><span class="comment">#详细全部的安装命令参见</span></span><br></pre></td></tr></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/lnmp/php5.5.38/etc</span><br><span class="line">cp php-fpm.conf.default php-fpm.conf</span><br><span class="line">若不存在php.ini文件，则拷贝一份源码文件中的出来</span><br><span class="line">cp /usr/<span class="built_in">local</span>/<span class="built_in">source</span>/php-5.5.38/php.ini-development /usr/<span class="built_in">local</span>/lnmp/php5.5.38/etc</span><br></pre></td></tr></table></figure>
+<h3 id="修改默认配置"><a href="#修改默认配置" class="headerlink" title="修改默认配置"></a>修改默认配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//修改php-fpm.conf 默认端口号</span><br><span class="line">listen = 127.0.0.1:9900</span><br></pre></td></tr></table></figure>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/<span class="built_in">local</span>/lnmp/php5.5.38/sbin/php-fpm</span><br></pre></td></tr></table></figure>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>基础环境因个人机器而异，如若需要依赖，编译过程当中自会提示，总结需要安装的依赖大致如下，yum安装即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">yum -y install \</span><br><span class="line">libcurl4-openssl-dev \</span><br><span class="line">pkg-config openssl \</span><br><span class="line">openssl-devel bzip2-devel  libjpeg \</span><br><span class="line">libjpeg-devel png-devel libpng-devel \</span><br><span class="line">freetype-devel openldap-devel.i386 \</span><br><span class="line">openldap-devel libmcrypt-devel \</span><br><span class="line">sqlite3-devel  sqlite-devel libtidy \</span><br><span class="line">libtidy-devel install libxslt-devel</span><br></pre></td></tr></table></figure>
+<h2 id="Nginx-安装"><a href="#Nginx-安装" class="headerlink" title="Nginx 安装"></a>Nginx 安装</h2><h3 id="解压安装包-1"><a href="#解压安装包-1" class="headerlink" title="解压安装包"></a>解压安装包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/<span class="built_in">source</span></span><br><span class="line">tar -zxvf nginx-1.10.2.tar.gz &amp;&amp; <span class="built_in">cd</span> nginx-1.10.2</span><br></pre></td></tr></table></figure>
+<h3 id="编译-amp-安装-1"><a href="#编译-amp-安装-1" class="headerlink" title="编译&amp;安装"></a>编译&amp;安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置编译选项</span></span><br><span class="line">./configure --prefix=/usr/<span class="built_in">local</span>/lnmp/nginx1.10.2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译&amp;&amp;安装</span></span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<h3 id="检查及启动"><a href="#检查及启动" class="headerlink" title="检查及启动"></a>检查及启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/usr/<span class="built_in">local</span>/lnmp/nginx.1.10.2/sbin/nginx -v <span class="comment">#查看版本号</span></span><br><span class="line">/usr/<span class="built_in">local</span>/lnmp/nginx.1.10.2/sbin/nginx</span><br></pre></td></tr></table></figure>
+<h3 id="注意事项-1"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h3><p> 举个栗子，安装过程中可能遇到下面这个错误，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error：the HTTP rewrite module requires the PCRE library</span><br></pre></td></tr></table></figure>
+<p><code>pcre</code>是<code>nginx</code>在<code>rewrite</code>伪静态匹配规则用的正则库，我们用<code>yum</code>安装最新<code>pcre</code>如下，再次尝试无果，查阅相关资料，安装<code>pcre-devel</code>即可，关于pcre和pcre-devel区别，</p>
+<h2 id="MySql-安装"><a href="#MySql-安装" class="headerlink" title="MySql 安装"></a>MySql 安装</h2><h3 id="解压安装包-2"><a href="#解压安装包-2" class="headerlink" title="解压安装包"></a>解压安装包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/<span class="built_in">source</span></span><br><span class="line">tar -zxvf mysql-5.5.56.tar.gz &amp;&amp; <span class="built_in">cd</span> mysql-server-mysql-5.5.56</span><br></pre></td></tr></table></figure>
+<h3 id="编译-amp-安装-2"><a href="#编译-amp-安装-2" class="headerlink" title="编译&amp;安装"></a>编译&amp;安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mysql从5.5起，源码安装使用cmake，首先安装cmake</span></span><br><span class="line">yum -y install cmake</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置编译选项</span></span><br><span class="line">cmake \</span><br><span class="line">-DCMAKE_INSTALL_PREFIX=/usr/<span class="built_in">local</span>/lnmp/mysql5.6 \</span><br><span class="line">-DMYSQL_DATADIR=/usr/<span class="built_in">local</span>/lnmp/mysql5.6/data \</span><br><span class="line">-DSYSCONFDIR=/etc \-DWITH_MYISAM_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITH_INNOBASE_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITH_MEMORY_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITH_READLINE=1 \</span><br><span class="line">-DMYSQL_UNIX_ADDR=/var/lib/mysql/mysql.sock \</span><br><span class="line">-DMYSQL_TCP_PORT=3306 \</span><br><span class="line">-DENABLED_LOCAL_INFILE=1 \</span><br><span class="line">-DWITH_PARTITION_STORAGE_ENGINE=1 \</span><br><span class="line">-DEXTRA_CHARSETS=all \</span><br><span class="line">-DDEFAULT_CHARSET=utf8 \</span><br><span class="line">-DDEFAULT_COLLATION=utf8_general_ci</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译&amp;&amp;安装</span></span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">编译参数可参见 http://dev.mysql.com/doc/refman/5.5/en/<span class="built_in">source</span>-configuration-options.html</span><br></pre></td></tr></table></figure>
+<h3 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd //查看⽤用户列列表</span><br><span class="line">cat /etc/group //查看⽤用户组列列表</span><br><span class="line"></span><br><span class="line">//若无mysql用户则创建</span><br><span class="line">groupadd mysql</span><br><span class="line">useradd -g mysql mysql </span><br><span class="line"></span><br><span class="line">//修改/usr/<span class="built_in">local</span>/lnmp/mysql5.6权限</span><br><span class="line">chown -R mysql:mysql /usr/<span class="built_in">local</span>/lnmp/mysql5.6</span><br><span class="line"></span><br><span class="line">//初始化配置</span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/lnmp/mysql5.6 </span><br><span class="line">//如果未发现my.cnf，则拷贝一份 </span><br><span class="line">cp /usr/<span class="built_in">local</span>/lnmp/mysql5.6/suport_files/my-default.cnf ../my.cnf</span><br><span class="line"></span><br><span class="line">//修改my.cnf默认配置</span><br><span class="line">datadir=/usr/<span class="built_in">local</span>/lnmp/mysql5.6/data/mysql</span><br><span class="line">port = 6000</span><br><span class="line"></span><br><span class="line">//初始化数据库</span><br><span class="line">/usr/<span class="built_in">local</span>/lnmp/mysql5.6/scripts/mysql_install_db --user=mysql --basedir=/usr/<span class="built_in">local</span>/lnmp/mysql5.6</span><br></pre></td></tr></table></figure>
+<h3 id="启动-1"><a href="#启动-1" class="headerlink" title="启动"></a>启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/<span class="built_in">local</span>/lnmp/mysql5.6/bin/mysqld_safe --defaults-file=/usr/<span class="built_in">local</span>/lnmp/mysql5.6/my.cnf &amp;</span><br></pre></td></tr></table></figure>
+<h3 id="注意事项-2"><a href="#注意事项-2" class="headerlink" title="注意事项"></a>注意事项</h3><p> 编译运行过程需要安装如下依赖（视不同机器情况而定）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install ncurses-devel gcc gcc-c++ bison</span><br></pre></td></tr></table></figure>
+<h2 id="LNMP-运行配置"><a href="#LNMP-运行配置" class="headerlink" title="LNMP 运行配置"></a>LNMP 运行配置</h2><p>查看php nginx mysql是否都已启动，若无启之</p>
+<h3 id="配置-2"><a href="#配置-2" class="headerlink" title="配置"></a>配置</h3><p>修改nginx配置如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen 8800;</span><br><span class="line">        server_name testlnmp.lianjia.com;</span><br><span class="line"></span><br><span class="line">        root /data0/www/htdocs/lnmp;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            root /data0/www/htdocs/lnmp;</span><br><span class="line">            index  index.php;</span><br><span class="line">            <span class="keyword">if</span> (!-e <span class="variable">$request_filename</span>)&#123;</span><br><span class="line">                 rewrite ^/(.*) /index.php last;</span><br><span class="line">                 &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        location ~ \.php$ &#123;</span><br><span class="line">            fastcgi_pass   127.0.0.1:9900;</span><br><span class="line">            fastcgi_index  index.php;</span><br><span class="line">            fastcgi_param  SCRIPT_FILENAME  <span class="variable">$document_root</span><span class="variable">$real_script_name</span>;</span><br><span class="line">            include        fastcgi_params;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="重启nginx"><a href="#重启nginx" class="headerlink" title="重启nginx"></a>重启nginx</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/<span class="built_in">local</span>/lnmp/nginx.1.10.2/sbin/nginx -s reload</span><br></pre></td></tr></table></figure>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p> 在/data0/www/htdocs/lnmp下新建index.php，输出‘hello word’<br> 访问 <127.0.0.1:8800> 即可</127.0.0.1:8800></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>岂曰无衣，与子同袍</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="赤乌_Rsun WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Lnmp/" rel="tag"># Lnmp</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/10/Golang_first/" rel="prev" title="Golang 基础知识">
+                Golang 基础知识 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="赤乌_Rsun" />
+          <p class="site-author-name" itemprop="name">赤乌_Rsun</p>
+           
+              <p class="site-description motion-element" itemprop="description">曾洒脱，误入漫途；渐入世，将军盟主；愁白头，未告别离</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/majixian" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://majixian620@gmail.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/2805271171/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目标"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x76EE;&#x6807;" class="headerlink" title="&#x76EE;&#x6807;"></a>&#x76EE;&#x6807;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x51C6;&#x5907;&#x5DE5;&#x4F5C;" class="headerlink" title="&#x51C6;&#x5907;&#x5DE5;&#x4F5C;"></a>&#x51C6;&#x5907;&#x5DE5;&#x4F5C;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本地目录创建"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x672C;&#x5730;&#x76EE;&#x5F55;&#x521B;&#x5EFA;" class="headerlink" title="&#x672C;&#x5730;&#x76EE;&#x5F55;&#x521B;&#x5EFA;"></a>&#x672C;&#x5730;&#x76EE;&#x5F55;&#x521B;&#x5EFA;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码准备"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#&#x6E90;&#x7801;&#x51C6;&#x5907;" class="headerlink" title="&#x6E90;&#x7801;&#x51C6;&#x5907;"></a>&#x6E90;&#x7801;&#x51C6;&#x5907;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP-安装"><span class="nav-number">3.</span> <span class="nav-text"><a href="#PHP-&#x5B89;&#x88C5;" class="headerlink" title="PHP &#x5B89;&#x88C5;"></a>PHP &#x5B89;&#x88C5;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解压安装包"><span class="nav-number">3.1.</span> <span class="nav-text"><a href="#&#x89E3;&#x538B;&#x5B89;&#x88C5;&#x5305;" class="headerlink" title="&#x89E3;&#x538B;&#x5B89;&#x88C5;&#x5305;"></a>&#x89E3;&#x538B;&#x5B89;&#x88C5;&#x5305;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译-amp-安装"><span class="nav-number">3.2.</span> <span class="nav-text"><a href="#&#x7F16;&#x8BD1;-amp-&#x5B89;&#x88C5;" class="headerlink" title="&#x7F16;&#x8BD1;&amp;&#x5B89;&#x88C5;"></a>&#x7F16;&#x8BD1;&amp;&#x5B89;&#x88C5;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">3.3.</span> <span class="nav-text"><a href="#&#x914D;&#x7F6E;" class="headerlink" title="&#x914D;&#x7F6E;"></a>&#x914D;&#x7F6E;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改默认配置"><span class="nav-number">3.4.</span> <span class="nav-text"><a href="#&#x4FEE;&#x6539;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;" class="headerlink" title="&#x4FEE;&#x6539;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;"></a>&#x4FEE;&#x6539;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动"><span class="nav-number">3.5.</span> <span class="nav-text"><a href="#&#x542F;&#x52A8;" class="headerlink" title="&#x542F;&#x52A8;"></a>&#x542F;&#x52A8;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-number">3.6.</span> <span class="nav-text"><a href="#&#x6CE8;&#x610F;&#x4E8B;&#x9879;" class="headerlink" title="&#x6CE8;&#x610F;&#x4E8B;&#x9879;"></a>&#x6CE8;&#x610F;&#x4E8B;&#x9879;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx-安装"><span class="nav-number">4.</span> <span class="nav-text"><a href="#Nginx-&#x5B89;&#x88C5;" class="headerlink" title="Nginx &#x5B89;&#x88C5;"></a>Nginx &#x5B89;&#x88C5;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解压安装包-1"><span class="nav-number">4.1.</span> <span class="nav-text"><a href="#&#x89E3;&#x538B;&#x5B89;&#x88C5;&#x5305;-1" class="headerlink" title="&#x89E3;&#x538B;&#x5B89;&#x88C5;&#x5305;"></a>&#x89E3;&#x538B;&#x5B89;&#x88C5;&#x5305;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译-amp-安装-1"><span class="nav-number">4.2.</span> <span class="nav-text"><a href="#&#x7F16;&#x8BD1;-amp-&#x5B89;&#x88C5;-1" class="headerlink" title="&#x7F16;&#x8BD1;&amp;&#x5B89;&#x88C5;"></a>&#x7F16;&#x8BD1;&amp;&#x5B89;&#x88C5;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查及启动"><span class="nav-number">4.3.</span> <span class="nav-text"><a href="#&#x68C0;&#x67E5;&#x53CA;&#x542F;&#x52A8;" class="headerlink" title="&#x68C0;&#x67E5;&#x53CA;&#x542F;&#x52A8;"></a>&#x68C0;&#x67E5;&#x53CA;&#x542F;&#x52A8;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项-1"><span class="nav-number">4.4.</span> <span class="nav-text"><a href="#&#x6CE8;&#x610F;&#x4E8B;&#x9879;-1" class="headerlink" title="&#x6CE8;&#x610F;&#x4E8B;&#x9879;"></a>&#x6CE8;&#x610F;&#x4E8B;&#x9879;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySql-安装"><span class="nav-number">5.</span> <span class="nav-text"><a href="#MySql-&#x5B89;&#x88C5;" class="headerlink" title="MySql &#x5B89;&#x88C5;"></a>MySql &#x5B89;&#x88C5;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解压安装包-2"><span class="nav-number">5.1.</span> <span class="nav-text"><a href="#&#x89E3;&#x538B;&#x5B89;&#x88C5;&#x5305;-2" class="headerlink" title="&#x89E3;&#x538B;&#x5B89;&#x88C5;&#x5305;"></a>&#x89E3;&#x538B;&#x5B89;&#x88C5;&#x5305;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译-amp-安装-2"><span class="nav-number">5.2.</span> <span class="nav-text"><a href="#&#x7F16;&#x8BD1;-amp-&#x5B89;&#x88C5;-2" class="headerlink" title="&#x7F16;&#x8BD1;&amp;&#x5B89;&#x88C5;"></a>&#x7F16;&#x8BD1;&amp;&#x5B89;&#x88C5;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-1"><span class="nav-number">5.3.</span> <span class="nav-text"><a href="#&#x914D;&#x7F6E;-1" class="headerlink" title="&#x914D;&#x7F6E;"></a>&#x914D;&#x7F6E;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动-1"><span class="nav-number">5.4.</span> <span class="nav-text"><a href="#&#x542F;&#x52A8;-1" class="headerlink" title="&#x542F;&#x52A8;"></a>&#x542F;&#x52A8;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项-2"><span class="nav-number">5.5.</span> <span class="nav-text"><a href="#&#x6CE8;&#x610F;&#x4E8B;&#x9879;-2" class="headerlink" title="&#x6CE8;&#x610F;&#x4E8B;&#x9879;"></a>&#x6CE8;&#x610F;&#x4E8B;&#x9879;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LNMP-运行配置"><span class="nav-number">6.</span> <span class="nav-text"><a href="#LNMP-&#x8FD0;&#x884C;&#x914D;&#x7F6E;" class="headerlink" title="LNMP &#x8FD0;&#x884C;&#x914D;&#x7F6E;"></a>LNMP &#x8FD0;&#x884C;&#x914D;&#x7F6E;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-2"><span class="nav-number">6.1.</span> <span class="nav-text"><a href="#&#x914D;&#x7F6E;-2" class="headerlink" title="&#x914D;&#x7F6E;"></a>&#x914D;&#x7F6E;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重启nginx"><span class="nav-number">6.2.</span> <span class="nav-text"><a href="#&#x91CD;&#x542F;nginx" class="headerlink" title="&#x91CD;&#x542F;nginx"></a>&#x91CD;&#x542F;nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">6.3.</span> <span class="nav-text"><a href="#&#x6D4B;&#x8BD5;" class="headerlink" title="&#x6D4B;&#x8BD5;"></a>&#x6D4B;&#x8BD5;</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">赤乌_Rsun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("xTWceCngiBeXoxFk2kI9uEKa-gzGzoHsz", "hmwNldeNXMKRLdv22HNu8faz");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
