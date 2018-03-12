@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="PHP," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="PHP 基础知识汇总 开发过程中常见的一些操作用法，大多数是PHP自带方法，减少在代码编写中自己处理一些不必要的逻辑。 数组常用数组方法 判断是否是数组is_array() 函数用来判断一个变量是否是数组，用法如下： 12345678$arr = [    &apos;a&apos; =&amp;gt; &apos;A&apos;,    &apos;b&apos; =&amp;gt; &apos;B&apos;,    &apos;c&apos; =&amp;gt; &apos;C&apos;,    &apos;d&apos; =&amp;gt; &apos;D&apos;,];v">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP 基础知识汇总(数组字符串篇)">
+<meta property="og:url" content="http://jixianma.com/2018/03/01/PHP_summary/index.html">
+<meta property="og:site_name" content="赤乌_Run的博客">
+<meta property="og:description" content="PHP 基础知识汇总 开发过程中常见的一些操作用法，大多数是PHP自带方法，减少在代码编写中自己处理一些不必要的逻辑。 数组常用数组方法 判断是否是数组is_array() 函数用来判断一个变量是否是数组，用法如下： 12345678$arr = [    &apos;a&apos; =&amp;gt; &apos;A&apos;,    &apos;b&apos; =&amp;gt; &apos;B&apos;,    &apos;c&apos; =&amp;gt; &apos;C&apos;,    &apos;d&apos; =&amp;gt; &apos;D&apos;,];v">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-12T09:15:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP 基础知识汇总(数组字符串篇)">
+<meta name="twitter:description" content="PHP 基础知识汇总 开发过程中常见的一些操作用法，大多数是PHP自带方法，减少在代码编写中自己处理一些不必要的逻辑。 数组常用数组方法 判断是否是数组is_array() 函数用来判断一个变量是否是数组，用法如下： 12345678$arr = [    &apos;a&apos; =&amp;gt; &apos;A&apos;,    &apos;b&apos; =&amp;gt; &apos;B&apos;,    &apos;c&apos; =&amp;gt; &apos;C&apos;,    &apos;d&apos; =&amp;gt; &apos;D&apos;,];v">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jixianma.com/2018/03/01/PHP_summary/"/>
+
+
+
+
+
+  <title>PHP 基础知识汇总(数组字符串篇) | 赤乌_Run的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">赤乌_Run的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于作者
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jixianma.com/2018/03/01/PHP_summary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赤乌_Rsun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赤乌_Run的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PHP 基础知识汇总(数组字符串篇)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-01T18:27:47+08:00">
+                2018-03-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/03/01/PHP_summary/" class="leancloud_visitors" data-flag-title="PHP 基础知识汇总(数组字符串篇)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>PHP 基础知识汇总</p>
+<p>开发过程中常见的一些操作用法，大多数是PHP自带方法，减少在代码编写中自己处理一些不必要的逻辑。</p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>常用数组方法</p>
+<h3 id="判断是否是数组"><a href="#判断是否是数组" class="headerlink" title="判断是否是数组"></a>判断是否是数组</h3><p>is_array() 函数用来判断一个变量是否是数组，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$arr</span> = [</span><br><span class="line">    <span class="string">'a'</span> =&gt; <span class="string">'A'</span>,</span><br><span class="line">    <span class="string">'b'</span> =&gt; <span class="string">'B'</span>,</span><br><span class="line">    <span class="string">'c'</span> =&gt; <span class="string">'C'</span>,</span><br><span class="line">    <span class="string">'d'</span> =&gt; <span class="string">'D'</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">var_dump(is_array(<span class="variable">$arr</span>));</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool(<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="获取数组值"><a href="#获取数组值" class="headerlink" title="获取数组值"></a>获取数组值</h3><p>array_values() 方法用来获取一个数组的值，并给其建立数字索引，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$arr</span> = [</span><br><span class="line">    <span class="string">'a'</span> =&gt; <span class="string">'A'</span>,</span><br><span class="line">    <span class="string">'b'</span> =&gt; <span class="string">'B'</span>,</span><br><span class="line">    <span class="string">'c'</span> =&gt; <span class="string">'C'</span>,</span><br><span class="line">    <span class="string">'d'</span> =&gt; <span class="string">'D'</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">print_r(array_values(<span class="variable">$arr</span>));</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] =&gt; A</span><br><span class="line">    [1] =&gt; B</span><br><span class="line">    [2] =&gt; C</span><br><span class="line">    [3] =&gt; D</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="获取数组key"><a href="#获取数组key" class="headerlink" title="获取数组key"></a>获取数组key</h3><p>array_keys() 方法用来获取一个数组的key，可指定返回某个元素的key，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$arr</span> = [</span><br><span class="line">    <span class="string">'a'</span> =&gt; <span class="string">'A'</span>,</span><br><span class="line">    <span class="string">'b'</span> =&gt; <span class="string">'B'</span>,</span><br><span class="line">    <span class="string">'c'</span> =&gt; <span class="string">'C'</span>,</span><br><span class="line">    <span class="string">'d'</span> =&gt; <span class="string">'D'</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">print_r(array_keys(<span class="variable">$arr</span>));</span><br><span class="line">print_r(array_keys(<span class="variable">$arr</span>, <span class="string">'B'</span>));</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] =&gt; a</span><br><span class="line">    [1] =&gt; b</span><br><span class="line">    [2] =&gt; c</span><br><span class="line">    [3] =&gt; d</span><br><span class="line">)</span><br><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] =&gt; b</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="转化数组KV值"><a href="#转化数组KV值" class="headerlink" title="转化数组KV值"></a>转化数组KV值</h3><p>array_flip() 函数用来交换数组的键值，如果某个值存在多次，则以最后一个键名作为它的值，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$arr</span> = [</span><br><span class="line">    <span class="string">'a'</span> =&gt; <span class="string">'A'</span>,</span><br><span class="line">    <span class="string">'b'</span> =&gt; <span class="string">'B'</span>,</span><br><span class="line">    <span class="string">'c'</span> =&gt; <span class="string">'C'</span>,</span><br><span class="line">    <span class="string">'d'</span> =&gt; <span class="string">'D'</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">print_r(array_flip(<span class="variable">$arr</span>));</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [A] =&gt; a</span><br><span class="line">    [B] =&gt; b</span><br><span class="line">    [C] =&gt; c</span><br><span class="line">    [D] =&gt; d</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="检查数组是否存在某个key"><a href="#检查数组是否存在某个key" class="headerlink" title="检查数组是否存在某个key"></a>检查数组是否存在某个key</h3><p>array_key_exists() 函数用来判断数组中是否存在某个key，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$arr</span> = [</span><br><span class="line">    <span class="string">'a'</span> =&gt; <span class="string">'A'</span>,</span><br><span class="line">    <span class="string">'b'</span> =&gt; <span class="string">'B'</span>,</span><br><span class="line">    <span class="string">'c'</span> =&gt; <span class="string">'C'</span>,</span><br><span class="line">    <span class="string">'d'</span> =&gt; <span class="string">'D'</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">var_dump(array_key_exists(<span class="string">'a'</span>, <span class="variable">$arr</span>));</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool(<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="检查数组是否存在某个值"><a href="#检查数组是否存在某个值" class="headerlink" title="检查数组是否存在某个值"></a>检查数组是否存在某个值</h3><p>in_array() 函数用来判断数组中是否存在某个元素，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$arr</span> = [</span><br><span class="line">    <span class="string">'a'</span> =&gt; <span class="string">'A'</span>,</span><br><span class="line">    <span class="string">'b'</span> =&gt; <span class="string">'B'</span>,</span><br><span class="line">    <span class="string">'c'</span> =&gt; <span class="string">'C'</span>,</span><br><span class="line">    <span class="string">'d'</span> =&gt; <span class="string">'D'</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">var_dump(in_array(<span class="string">'B'</span>, <span class="variable">$arr</span>));</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool(<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="给数组追加元素"><a href="#给数组追加元素" class="headerlink" title="给数组追加元素"></a>给数组追加元素</h3><p>array_push() 函数用来给数组追加一个元素，传引用，返回处理之后的元素数组的个数，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$arr</span> = [</span><br><span class="line">    <span class="string">'a'</span> =&gt; <span class="string">'A'</span>,</span><br><span class="line">    <span class="string">'b'</span> =&gt; <span class="string">'B'</span>,</span><br><span class="line">    <span class="string">'c'</span> =&gt; <span class="string">'C'</span>,</span><br><span class="line">    <span class="string">'d'</span> =&gt; <span class="string">'D'</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">var_dump(array_push(<span class="variable">$arr</span>, <span class="string">'E'</span>));</span><br><span class="line">print_r(<span class="variable">$arr</span>);</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int(5)</span><br><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [a] =&gt; A</span><br><span class="line">    [b] =&gt; B</span><br><span class="line">    [c] =&gt; C</span><br><span class="line">    [d] =&gt; D</span><br><span class="line">    [0] =&gt; E</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="弹出数组的最后一个元素"><a href="#弹出数组的最后一个元素" class="headerlink" title="弹出数组的最后一个元素"></a>弹出数组的最后一个元素</h3><p>array_pop() 函数用来弹出数组最后一个元素（出栈），传引用，返回数组的最后一个元素，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$arr</span> = [</span><br><span class="line">    <span class="string">'a'</span> =&gt; <span class="string">'A'</span>,</span><br><span class="line">    <span class="string">'b'</span> =&gt; <span class="string">'B'</span>,</span><br><span class="line">    <span class="string">'c'</span> =&gt; <span class="string">'C'</span>,</span><br><span class="line">    <span class="string">'d'</span> =&gt; <span class="string">'D'</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">var_dump(array_pop(<span class="variable">$arr</span>));</span><br><span class="line">print_r(<span class="variable">$arr</span>);</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">string(1) <span class="string">"D"</span></span><br><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [a] =&gt; A</span><br><span class="line">    [b] =&gt; B</span><br><span class="line">    [c] =&gt; C</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="在数组开头插入元素"><a href="#在数组开头插入元素" class="headerlink" title="在数组开头插入元素"></a>在数组开头插入元素</h3><p>array_unshift() 函数用来在数组开头插入一个或多个元素，传引用，返回处理后数组的元素个数，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$arr</span> = [</span><br><span class="line">    <span class="string">'a'</span> =&gt; <span class="string">'A'</span>,</span><br><span class="line">    <span class="string">'b'</span> =&gt; <span class="string">'B'</span>,</span><br><span class="line">    <span class="string">'c'</span> =&gt; <span class="string">'C'</span>,</span><br><span class="line">    <span class="string">'d'</span> =&gt; <span class="string">'D'</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">var_dump(array_unshift(<span class="variable">$arr</span>, <span class="string">'E'</span>, <span class="string">'F'</span>));</span><br><span class="line">print_r(<span class="variable">$arr</span>);</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int(6)</span><br><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] =&gt; E</span><br><span class="line">    [1] =&gt; F</span><br><span class="line">    [a] =&gt; A</span><br><span class="line">    [b] =&gt; B</span><br><span class="line">    [c] =&gt; C</span><br><span class="line">    [d] =&gt; D</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="移除数组开头的元素"><a href="#移除数组开头的元素" class="headerlink" title="移除数组开头的元素"></a>移除数组开头的元素</h3><p>array_shift() 函数用来移除数组的第一个元素，传引用，返回数组第一个元素的值，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$arr</span> = [</span><br><span class="line">    <span class="string">'a'</span> =&gt; <span class="string">'A'</span>,</span><br><span class="line">    <span class="string">'b'</span> =&gt; <span class="string">'B'</span>,</span><br><span class="line">    <span class="string">'c'</span> =&gt; <span class="string">'C'</span>,</span><br><span class="line">    <span class="string">'d'</span> =&gt; <span class="string">'D'</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">var_dump(array_shift(<span class="variable">$arr</span>));</span><br><span class="line">print_r(<span class="variable">$arr</span>);</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">string(1) <span class="string">"A"</span></span><br><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [b] =&gt; B</span><br><span class="line">    [c] =&gt; C</span><br><span class="line">    [d] =&gt; D</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="获取数组随机元素"><a href="#获取数组随机元素" class="headerlink" title="获取数组随机元素"></a>获取数组随机元素</h3><p>array_rand() 函数用来获取数组的随机值，若只取一个则返回该元素的key，若取多个，则返回KV键值对，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$arr</span> = [</span><br><span class="line">    <span class="string">'a'</span> =&gt; <span class="string">'A'</span>,</span><br><span class="line">    <span class="string">'b'</span> =&gt; <span class="string">'B'</span>,</span><br><span class="line">    <span class="string">'c'</span> =&gt; <span class="string">'C'</span>,</span><br><span class="line">    <span class="string">'d'</span> =&gt; <span class="string">'D'</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">var_dump(array_rand(<span class="variable">$arr</span>, 1));</span><br><span class="line">print_r(array_rand(<span class="variable">$arr</span>, 2));</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string(1) <span class="string">"a"</span></span><br><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] =&gt; c</span><br><span class="line">    [1] =&gt; d</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="截取数组一段元素"><a href="#截取数组一段元素" class="headerlink" title="截取数组一段元素"></a>截取数组一段元素</h3><p>array_slice() 函数用来截取数组元素，返回数组，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$arr</span> = [</span><br><span class="line">    <span class="string">'a'</span> =&gt; <span class="string">'A'</span>,</span><br><span class="line">    <span class="string">'b'</span> =&gt; <span class="string">'B'</span>,</span><br><span class="line">    <span class="string">'c'</span> =&gt; <span class="string">'C'</span>,</span><br><span class="line">    <span class="string">'d'</span> =&gt; <span class="string">'D'</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">print_r(array_slice(<span class="variable">$arr</span>, 0, 2));</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [a] =&gt; A</span><br><span class="line">    [b] =&gt; B</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="创建一个数组"><a href="#创建一个数组" class="headerlink" title="创建一个数组"></a>创建一个数组</h3><p>array_combine() 函数用来创建一个数组，用一个数组的值做键名，另一个数组的值作为值。用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$arr</span> = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>];</span><br><span class="line"></span><br><span class="line"><span class="variable">$arr1</span> = [<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>, <span class="string">'D'</span>];</span><br><span class="line"></span><br><span class="line">print_r(array_combine(<span class="variable">$arr</span>, <span class="variable">$arr1</span>));</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [a] =&gt; A</span><br><span class="line">    [b] =&gt; B</span><br><span class="line">    [c] =&gt; C</span><br><span class="line">    [d] =&gt; D</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="合并两个数组"><a href="#合并两个数组" class="headerlink" title="合并两个数组"></a>合并两个数组</h3><p>array_merge() 函数用来合并一个或多个数组的单元，数组的值附加在前一个数组后面，返回处理后的结果，<br>如果输入的数组中有相同的字符串键名，则该键名后面的值将覆盖前一个值。然而，如果数组包含数字键名，后面的值将不会覆盖原来的值，而是附加到后面。<br>如果只给了一个数组并且该数组是数字索引的，则键名会以连续方式重新索引。</p>
+<p>用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$arr</span> = [</span><br><span class="line">    <span class="string">'a'</span> =&gt; <span class="string">'A'</span>,</span><br><span class="line">    <span class="string">'b'</span> =&gt; <span class="string">'B'</span>,</span><br><span class="line">    <span class="string">'c'</span> =&gt; <span class="string">'C'</span>,</span><br><span class="line">    <span class="string">'d'</span> =&gt; <span class="string">'D'</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="variable">$arr1</span> = [</span><br><span class="line">    <span class="string">'e'</span> =&gt; <span class="string">'E'</span>,</span><br><span class="line">    <span class="string">'f'</span> =&gt; <span class="string">'F'</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">print_r(array_merge(<span class="variable">$arr</span>, <span class="variable">$arr1</span>));</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [a] =&gt; A</span><br><span class="line">    [b] =&gt; B</span><br><span class="line">    [c] =&gt; C</span><br><span class="line">    [d] =&gt; D</span><br><span class="line">    [e] =&gt; E</span><br><span class="line">    [f] =&gt; F</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>合并两个数组，也可以用 + 操作符来做，它和array_merge()函数的区别是：</p>
+<ol>
+<li>array_merge() 后面的数组覆盖第一个, + 则保留相同key的第一个数组的值</li>
+<li><ul>
+<li>保留第一个数组的键值</li>
+</ul>
+</li>
+</ol>
+<h3 id="数组求交集"><a href="#数组求交集" class="headerlink" title="数组求交集"></a>数组求交集</h3><p>array_intersect() 函数用来求两个个或多个数组的交集，返回数组保留第一个数组的键名，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$arr</span> = [a =&gt;<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>];</span><br><span class="line"></span><br><span class="line"><span class="variable">$arr1</span> = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'C'</span>, <span class="string">'D'</span>];</span><br><span class="line"></span><br><span class="line">print_r(array_intersect(<span class="variable">$arr</span>, <span class="variable">$arr1</span>));</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [a] =&gt; a</span><br><span class="line">    [0] =&gt; b</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="数组求差集"><a href="#数组求差集" class="headerlink" title="数组求差集"></a>数组求差集</h3><p>array_diff() 函数用来求两个或多个数组的差集，返回数组，键名保持不变，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$arr</span> = [a =&gt;<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>];</span><br><span class="line"></span><br><span class="line"><span class="variable">$arr1</span> = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'C'</span>, <span class="string">'D'</span>];</span><br><span class="line"></span><br><span class="line">print_r(array_diff(<span class="variable">$arr</span>, <span class="variable">$arr1</span>));</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [1] =&gt; c</span><br><span class="line">    [2] =&gt; d</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="数组排序（正序）"><a href="#数组排序（正序）" class="headerlink" title="数组排序（正序）"></a>数组排序（正序）</h3><p>asort() 函数用来对数组进行排序并保持索引关系，传引用，返回TRUE/FALSE，排序之后数组索引保持不变，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="variable">$arr</span> = [<span class="string">'a'</span> =&gt; <span class="string">'y'</span>, <span class="string">'b'</span> =&gt; <span class="string">'z'</span>, <span class="string">'c'</span> =&gt; <span class="string">'x'</span>];</span><br><span class="line">asort(<span class="variable">$arr</span>);</span><br><span class="line">print_r();</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [c] =&gt; x</span><br><span class="line">    [a] =&gt; y</span><br><span class="line">    [b] =&gt; z</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="数组排序（逆序）"><a href="#数组排序（逆序）" class="headerlink" title="数组排序（逆序）"></a>数组排序（逆序）</h3><p>arsort() 函数用来对数组进行排序并保持索引关系，传引用，返回TRUE/FALSE，排序之后数组索引保持不变，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="variable">$arr</span> = [<span class="string">'a'</span> =&gt; <span class="string">'y'</span>, <span class="string">'b'</span> =&gt; <span class="string">'z'</span>, <span class="string">'c'</span> =&gt; <span class="string">'x'</span>];</span><br><span class="line">arsort(<span class="variable">$arr</span>);</span><br><span class="line">print_r(<span class="variable">$arr</span>);</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(</span><br><span class="line">    [b] =&gt; z</span><br><span class="line">    [a] =&gt; y</span><br><span class="line">    [c] =&gt; x</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="获取数组的某一列"><a href="#获取数组的某一列" class="headerlink" title="获取数组的某一列"></a>获取数组的某一列</h3><p>array_column() 函数用来返回数组的某一列，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$records</span> = array(</span><br><span class="line">    array(</span><br><span class="line">        <span class="string">'id'</span> =&gt; 2135,</span><br><span class="line">        <span class="string">'first_name'</span> =&gt; <span class="string">'John'</span>,</span><br><span class="line">        <span class="string">'last_name'</span> =&gt; <span class="string">'Doe'</span>,</span><br><span class="line">    ),</span><br><span class="line">    array(</span><br><span class="line">        <span class="string">'id'</span> =&gt; 3245,</span><br><span class="line">        <span class="string">'first_name'</span> =&gt; <span class="string">'Sally'</span>,</span><br><span class="line">        <span class="string">'last_name'</span> =&gt; <span class="string">'Smith'</span>,</span><br><span class="line">    ),</span><br><span class="line">    array(</span><br><span class="line">        <span class="string">'id'</span> =&gt; 5342,</span><br><span class="line">        <span class="string">'first_name'</span> =&gt; <span class="string">'Jane'</span>,</span><br><span class="line">        <span class="string">'last_name'</span> =&gt; <span class="string">'Jones'</span>,</span><br><span class="line">    ),</span><br><span class="line">    array(</span><br><span class="line">        <span class="string">'id'</span> =&gt; 5623,</span><br><span class="line">        <span class="string">'first_name'</span> =&gt; <span class="string">'Peter'</span>,</span><br><span class="line">        <span class="string">'last_name'</span> =&gt; <span class="string">'Doe'</span>,</span><br><span class="line">    )</span><br><span class="line">);</span><br><span class="line"> </span><br><span class="line"><span class="variable">$first_names</span> = array_column(<span class="variable">$records</span>, <span class="string">'first_name'</span>);</span><br><span class="line">//<span class="variable">$first_names</span> = array_column(<span class="variable">$records</span>, <span class="string">'first_name'</span>, <span class="string">'id'</span>); //用id做key</span><br><span class="line">//<span class="variable">$first_names</span> = array_column(<span class="variable">$records</span>, null, <span class="string">'id'</span>); //用id做key返回所有列</span><br><span class="line"></span><br><span class="line">print_r(<span class="variable">$first_names</span>);</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] =&gt; John</span><br><span class="line">    [1] =&gt; Sally</span><br><span class="line">    [2] =&gt; Jane</span><br><span class="line">    [3] =&gt; Peter</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="字符串处理"><a href="#字符串处理" class="headerlink" title="字符串处理"></a>字符串处理</h2><p>如下总结常用字符串处理函数.</p>
+<h3 id="求字符串长度"><a href="#求字符串长度" class="headerlink" title="求字符串长度"></a>求字符串长度</h3><p>strlen() 函数用来求字符串长度，用法如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$str</span> = <span class="string">'abcdef'</span>;</span><br><span class="line"><span class="built_in">echo</span> strlen(<span class="variable">$str</span>);</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">6</span><br></pre></td></tr></table></figure>
+<h3 id="字符串分割"><a href="#字符串分割" class="headerlink" title="字符串分割"></a>字符串分割</h3><p>explode() 函数用来将一个字符串按指定分割符分割，用法如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$str</span> = <span class="string">'a,b,c,d,e,f'</span>;</span><br><span class="line">print_r(explode(<span class="string">','</span>, <span class="variable">$str</span>));</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] =&gt; a</span><br><span class="line">    [1] =&gt; b</span><br><span class="line">    [2] =&gt; c</span><br><span class="line">    [3] =&gt; d</span><br><span class="line">    [4] =&gt; e</span><br><span class="line">    [5] =&gt; f</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="一维数组变字符串"><a href="#一维数组变字符串" class="headerlink" title="一维数组变字符串"></a>一维数组变字符串</h3><p>implode() 函数用来将一个一维数组转化为字符串，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$arr</span> = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>,<span class="string">'f'</span>];</span><br><span class="line"><span class="built_in">echo</span> implode(<span class="string">','</span>, <span class="variable">$arr</span>);</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a,b,c,d,e,f</span><br></pre></td></tr></table></figure>
+<h3 id="除去字符串首尾处空白"><a href="#除去字符串首尾处空白" class="headerlink" title="除去字符串首尾处空白"></a>除去字符串首尾处空白</h3><p>trim() 函数用来除去字符串首尾处字符串空白字符，这些内容包括””,”\t”,”\n”,”\r”, “\0”, “\0xb”, 用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$text</span>   = <span class="string">"\t\tThese are a few words :) ...  "</span>;</span><br><span class="line"><span class="variable">$hello</span>  = <span class="string">"Hello World"</span>;</span><br><span class="line">var_dump(<span class="variable">$text</span>, <span class="variable">$binary</span>, <span class="variable">$hello</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">"\n"</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$trimmed</span> = trim(<span class="variable">$text</span>);</span><br><span class="line">var_dump(<span class="variable">$trimmed</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$trimmed</span> = trim(<span class="variable">$text</span>, <span class="string">" \t."</span>);</span><br><span class="line">var_dump(<span class="variable">$trimmed</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$trimmed</span> = trim(<span class="variable">$hello</span>, <span class="string">"Hdle"</span>);</span><br><span class="line">var_dump(<span class="variable">$trimmed</span>);</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/Users/majixian/a.php:4:</span><br><span class="line">string(32) <span class="string">"		These are a few words :) ...  "</span></span><br><span class="line">/Users/majixian/a.php:4:</span><br><span class="line">NULL</span><br><span class="line">/Users/majixian/a.php:4:</span><br><span class="line">string(11) <span class="string">"Hello World"</span></span><br><span class="line"></span><br><span class="line">/Users/majixian/a.php:9:</span><br><span class="line">string(28) <span class="string">"These are a few words :) ..."</span></span><br><span class="line">/Users/majixian/a.php:12:</span><br><span class="line">string(24) <span class="string">"These are a few words :)"</span></span><br><span class="line">/Users/majixian/a.php:15:</span><br><span class="line">string(5) <span class="string">"o Wor"</span></span><br></pre></td></tr></table></figure>
+<p>与trim() 函数类似，ltrim()函数和rtrim() 函数分别对字符串的左右两侧进行去空白。</p>
+<h3 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h3><p>str_replace() 函数用来替换字符串中的某些字符(串)，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 赋值: &lt;body text=<span class="string">'black'</span>&gt;</span><br><span class="line"><span class="variable">$bodytag</span> = str_replace(<span class="string">"%body%"</span>, <span class="string">"black"</span>, <span class="string">"&lt;body text='%body%'&gt;"</span>);</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$bodytag</span> . <span class="string">"\n"</span>;</span><br><span class="line"></span><br><span class="line">// 赋值: Hll Wrld f PHP</span><br><span class="line"><span class="variable">$vowels</span> = array(<span class="string">"a"</span>, <span class="string">"e"</span>, <span class="string">"i"</span>, <span class="string">"o"</span>, <span class="string">"u"</span>, <span class="string">"A"</span>, <span class="string">"E"</span>, <span class="string">"I"</span>, <span class="string">"O"</span>, <span class="string">"U"</span>);</span><br><span class="line"><span class="variable">$onlyconsonants</span> = str_replace(<span class="variable">$vowels</span>, <span class="string">""</span>, <span class="string">"Hello World of PHP"</span>);</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$onlyconsonants</span> . <span class="string">"\n"</span>;</span><br><span class="line"></span><br><span class="line">// 赋值: You should eat pizza, beer, and ice cream every day</span><br><span class="line"><span class="variable">$phrase</span>  = <span class="string">"You should eat fruits, vegetables, and fiber every day."</span>;</span><br><span class="line"><span class="variable">$healthy</span> = array(<span class="string">"fruits"</span>, <span class="string">"vegetables"</span>, <span class="string">"fiber"</span>);</span><br><span class="line"><span class="variable">$yummy</span>   = array(<span class="string">"pizza"</span>, <span class="string">"beer"</span>, <span class="string">"ice cream"</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$newphrase</span> = str_replace(<span class="variable">$healthy</span>, <span class="variable">$yummy</span>, <span class="variable">$phrase</span>);</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$newphrase</span> . <span class="string">"\n"</span>;</span><br><span class="line"></span><br><span class="line">// 赋值: 2</span><br><span class="line"><span class="variable">$str</span> = str_replace(<span class="string">"ll"</span>, <span class="string">""</span>, <span class="string">"good golly miss molly!"</span>, <span class="variable">$count</span>);</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$count</span>;</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;body text=<span class="string">'black'</span>&gt;</span><br><span class="line">Hll Wrld f PHP</span><br><span class="line">You should eat pizza, beer, and ice cream every day.</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+<h3 id="字符串重复"><a href="#字符串重复" class="headerlink" title="字符串重复"></a>字符串重复</h3><p>str_repeat() 函数用来重复字符串，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> str_repeat(<span class="string">'test'</span>, 2);</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">testtest</span><br></pre></td></tr></table></figure>
+<h3 id="字符串切割转数组"><a href="#字符串切割转数组" class="headerlink" title="字符串切割转数组"></a>字符串切割转数组</h3><p>str_split() 函数用来将字符串转为数组，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$str</span> = <span class="string">"Hello Friend"</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$arr1</span> = str_split(<span class="variable">$str</span>);</span><br><span class="line"><span class="variable">$arr2</span> = str_split(<span class="variable">$str</span>, 3); //每个字符串的长度, 默认是1</span><br><span class="line"></span><br><span class="line">print_r(<span class="variable">$arr1</span>);</span><br><span class="line">print_r(<span class="variable">$arr2</span>);</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] =&gt; H</span><br><span class="line">    [1] =&gt; e</span><br><span class="line">    [2] =&gt; l</span><br><span class="line">    [3] =&gt; l</span><br><span class="line">    [4] =&gt; o</span><br><span class="line">    [5] =&gt;</span><br><span class="line">    [6] =&gt; F</span><br><span class="line">    [7] =&gt; r</span><br><span class="line">    [8] =&gt; i</span><br><span class="line">    [9] =&gt; e</span><br><span class="line">    [10] =&gt; n</span><br><span class="line">    [11] =&gt; d</span><br><span class="line">)</span><br><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] =&gt; Hel</span><br><span class="line">    [1] =&gt; lo</span><br><span class="line">    [2] =&gt; Fri</span><br><span class="line">    [3] =&gt; end</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="计算字符串中个字符信息"><a href="#计算字符串中个字符信息" class="headerlink" title="计算字符串中个字符信息"></a>计算字符串中个字符信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$data</span> = <span class="string">"Two Ts and one F."</span>;</span><br><span class="line"></span><br><span class="line">foreach (count_chars(<span class="variable">$data</span>, 1) as <span class="variable">$i</span> =&gt; <span class="variable">$val</span>) &#123;</span><br><span class="line">   <span class="built_in">echo</span> <span class="string">"There were <span class="variable">$val</span> instance(s) of \""</span> , chr(<span class="variable">$i</span>) , <span class="string">"\" in the string.\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">There were 4 instance(s) of <span class="string">" "</span> <span class="keyword">in</span> the string.</span><br><span class="line">There were 1 instance(s) of <span class="string">"."</span> <span class="keyword">in</span> the string.</span><br><span class="line">There were 1 instance(s) of <span class="string">"F"</span> <span class="keyword">in</span> the string.</span><br><span class="line">There were 2 instance(s) of <span class="string">"T"</span> <span class="keyword">in</span> the string.</span><br><span class="line">There were 1 instance(s) of <span class="string">"a"</span> <span class="keyword">in</span> the string.</span><br><span class="line">There were 1 instance(s) of <span class="string">"d"</span> <span class="keyword">in</span> the string.</span><br><span class="line">There were 1 instance(s) of <span class="string">"e"</span> <span class="keyword">in</span> the string.</span><br><span class="line">There were 2 instance(s) of <span class="string">"n"</span> <span class="keyword">in</span> the string.</span><br><span class="line">There were 2 instance(s) of <span class="string">"o"</span> <span class="keyword">in</span> the string.</span><br><span class="line">There were 1 instance(s) of <span class="string">"s"</span> <span class="keyword">in</span> the string.</span><br><span class="line">There were 1 instance(s) of <span class="string">"w"</span> <span class="keyword">in</span> the string.</span><br></pre></td></tr></table></figure>
+<h3 id="获取字符串中某个字串首次出现的位置"><a href="#获取字符串中某个字串首次出现的位置" class="headerlink" title="获取字符串中某个字串首次出现的位置"></a>获取字符串中某个字串首次出现的位置</h3><p>strpos() 函数用来查找一个字符串中某个字符串首次出现的位置，需要注意的是，如果没找到，则返回false，如果找到并且在首部，则返回int（0）,用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$mystring</span> = <span class="string">'abc'</span>;</span><br><span class="line"><span class="variable">$findme</span>   = <span class="string">'a'</span>;</span><br><span class="line"><span class="variable">$pos</span> = strpos(<span class="variable">$mystring</span>, <span class="variable">$findme</span>);</span><br><span class="line"></span><br><span class="line">var_dump(<span class="variable">$pos</span>);</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int(0)</span><br></pre></td></tr></table></figure>
+<h3 id="获取字符串的子串"><a href="#获取字符串的子串" class="headerlink" title="获取字符串的子串"></a>获取字符串的子串</h3><p>substr() 函数用来获取字符串的子串，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$rest</span> = substr(<span class="string">"abcdef"</span>, -1);    // 返回 <span class="string">"f"</span></span><br><span class="line"><span class="variable">$rest</span> = substr(<span class="string">"abcdef"</span>, -2);    // 返回 <span class="string">"ef"</span></span><br><span class="line"><span class="variable">$rest</span> = substr(<span class="string">"abcdef"</span>, -3, 1); // 返回 <span class="string">"d"</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$rest</span> = substr(<span class="string">"abcdef"</span>, 0, -1);  // 返回 <span class="string">"abcde"</span></span><br><span class="line"><span class="variable">$rest</span> = substr(<span class="string">"abcdef"</span>, 2, -1);  // 返回 <span class="string">"cde"</span></span><br><span class="line"><span class="variable">$rest</span> = substr(<span class="string">"abcdef"</span>, 4, -4);  // 返回 <span class="string">""</span></span><br><span class="line"><span class="variable">$rest</span> = substr(<span class="string">"abcdef"</span>, -3, -1); // 返回 <span class="string">"de"</span></span><br></pre></td></tr></table></figure>
+<h3 id="字符串转小写"><a href="#字符串转小写" class="headerlink" title="字符串转小写"></a>字符串转小写</h3><p>strtolower() 函数用来转化字符串为小写，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$str</span> = <span class="string">"Mary Had A Little Lamb and She LOVED It So"</span>;</span><br><span class="line"><span class="variable">$str</span> = strtolower(<span class="variable">$str</span>);</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$str</span>; // 打印 mary had a little lamb and she loved it so</span><br></pre></td></tr></table></figure>
+<h3 id="字符串转大写"><a href="#字符串转大写" class="headerlink" title="字符串转大写"></a>字符串转大写</h3><p>strtoupper() 函数用来转化字符串为大写，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$str</span> = <span class="string">"Mary Had A Little Lamb and She LOVED It So"</span>;</span><br><span class="line"><span class="variable">$str</span> = strtoupper(<span class="variable">$str</span>);</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$str</span>; // 打印 MARY HAD A LITTLE LAMB AND SHE LOVED IT SO</span><br></pre></td></tr></table></figure>
+<h3 id="特殊字符转html实体"><a href="#特殊字符转html实体" class="headerlink" title="特殊字符转html实体"></a>特殊字符转html实体</h3><p>htmlspecialchars() 函数用来将特殊字符转为html实体，该函数对于防止web网站XSS攻击有很大作用，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$new</span> = htmlspecialchars(<span class="string">"&lt;a href='test'&gt;Test&lt;/a&gt;"</span>, ENT_QUOTES);</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$new</span>; // &amp;lt;a href=&amp;<span class="comment">#039;test&amp;#039;&amp;gt;Test&amp;lt;/a&amp;gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="字符串转义"><a href="#字符串转义" class="headerlink" title="字符串转义"></a>字符串转义</h3><p>addslashes() 函数用反斜线来引用字符串，在数据库信息入库等使用，防止sql注入，用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$str</span> = <span class="string">"Is your name O'reilly?"</span>;</span><br><span class="line"></span><br><span class="line">// 输出： Is your name O\<span class="string">'reilly?</span></span><br><span class="line"><span class="string">echo addslashes($str);</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>岂曰无衣，与子同袍</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="赤乌_Rsun WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/01/Tcp_ip_first/" rel="next" title="TCP/IP卷学习笔记之概述篇">
+                <i class="fa fa-chevron-left"></i> TCP/IP卷学习笔记之概述篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="赤乌_Rsun" />
+          <p class="site-author-name" itemprop="name">赤乌_Rsun</p>
+           
+              <p class="site-description motion-element" itemprop="description">曾洒脱，误入漫途；渐入世，将军盟主；愁白头，未告别离</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/majixian" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://majixian620@gmail.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/2805271171/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数组"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x6570;&#x7EC4;" class="headerlink" title="&#x6570;&#x7EC4;"></a>&#x6570;&#x7EC4;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#判断是否是数组"><span class="nav-number">1.1.</span> <span class="nav-text"><a href="#&#x5224;&#x65AD;&#x662F;&#x5426;&#x662F;&#x6570;&#x7EC4;" class="headerlink" title="&#x5224;&#x65AD;&#x662F;&#x5426;&#x662F;&#x6570;&#x7EC4;"></a>&#x5224;&#x65AD;&#x662F;&#x5426;&#x662F;&#x6570;&#x7EC4;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取数组值"><span class="nav-number">1.2.</span> <span class="nav-text"><a href="#&#x83B7;&#x53D6;&#x6570;&#x7EC4;&#x503C;" class="headerlink" title="&#x83B7;&#x53D6;&#x6570;&#x7EC4;&#x503C;"></a>&#x83B7;&#x53D6;&#x6570;&#x7EC4;&#x503C;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取数组key"><span class="nav-number">1.3.</span> <span class="nav-text"><a href="#&#x83B7;&#x53D6;&#x6570;&#x7EC4;key" class="headerlink" title="&#x83B7;&#x53D6;&#x6570;&#x7EC4;key"></a>&#x83B7;&#x53D6;&#x6570;&#x7EC4;key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转化数组KV值"><span class="nav-number">1.4.</span> <span class="nav-text"><a href="#&#x8F6C;&#x5316;&#x6570;&#x7EC4;KV&#x503C;" class="headerlink" title="&#x8F6C;&#x5316;&#x6570;&#x7EC4;KV&#x503C;"></a>&#x8F6C;&#x5316;&#x6570;&#x7EC4;KV&#x503C;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查数组是否存在某个key"><span class="nav-number">1.5.</span> <span class="nav-text"><a href="#&#x68C0;&#x67E5;&#x6570;&#x7EC4;&#x662F;&#x5426;&#x5B58;&#x5728;&#x67D0;&#x4E2A;key" class="headerlink" title="&#x68C0;&#x67E5;&#x6570;&#x7EC4;&#x662F;&#x5426;&#x5B58;&#x5728;&#x67D0;&#x4E2A;key"></a>&#x68C0;&#x67E5;&#x6570;&#x7EC4;&#x662F;&#x5426;&#x5B58;&#x5728;&#x67D0;&#x4E2A;key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查数组是否存在某个值"><span class="nav-number">1.6.</span> <span class="nav-text"><a href="#&#x68C0;&#x67E5;&#x6570;&#x7EC4;&#x662F;&#x5426;&#x5B58;&#x5728;&#x67D0;&#x4E2A;&#x503C;" class="headerlink" title="&#x68C0;&#x67E5;&#x6570;&#x7EC4;&#x662F;&#x5426;&#x5B58;&#x5728;&#x67D0;&#x4E2A;&#x503C;"></a>&#x68C0;&#x67E5;&#x6570;&#x7EC4;&#x662F;&#x5426;&#x5B58;&#x5728;&#x67D0;&#x4E2A;&#x503C;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给数组追加元素"><span class="nav-number">1.7.</span> <span class="nav-text"><a href="#&#x7ED9;&#x6570;&#x7EC4;&#x8FFD;&#x52A0;&#x5143;&#x7D20;" class="headerlink" title="&#x7ED9;&#x6570;&#x7EC4;&#x8FFD;&#x52A0;&#x5143;&#x7D20;"></a>&#x7ED9;&#x6570;&#x7EC4;&#x8FFD;&#x52A0;&#x5143;&#x7D20;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#弹出数组的最后一个元素"><span class="nav-number">1.8.</span> <span class="nav-text"><a href="#&#x5F39;&#x51FA;&#x6570;&#x7EC4;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;" class="headerlink" title="&#x5F39;&#x51FA;&#x6570;&#x7EC4;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;"></a>&#x5F39;&#x51FA;&#x6570;&#x7EC4;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在数组开头插入元素"><span class="nav-number">1.9.</span> <span class="nav-text"><a href="#&#x5728;&#x6570;&#x7EC4;&#x5F00;&#x5934;&#x63D2;&#x5165;&#x5143;&#x7D20;" class="headerlink" title="&#x5728;&#x6570;&#x7EC4;&#x5F00;&#x5934;&#x63D2;&#x5165;&#x5143;&#x7D20;"></a>&#x5728;&#x6570;&#x7EC4;&#x5F00;&#x5934;&#x63D2;&#x5165;&#x5143;&#x7D20;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移除数组开头的元素"><span class="nav-number">1.10.</span> <span class="nav-text"><a href="#&#x79FB;&#x9664;&#x6570;&#x7EC4;&#x5F00;&#x5934;&#x7684;&#x5143;&#x7D20;" class="headerlink" title="&#x79FB;&#x9664;&#x6570;&#x7EC4;&#x5F00;&#x5934;&#x7684;&#x5143;&#x7D20;"></a>&#x79FB;&#x9664;&#x6570;&#x7EC4;&#x5F00;&#x5934;&#x7684;&#x5143;&#x7D20;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取数组随机元素"><span class="nav-number">1.11.</span> <span class="nav-text"><a href="#&#x83B7;&#x53D6;&#x6570;&#x7EC4;&#x968F;&#x673A;&#x5143;&#x7D20;" class="headerlink" title="&#x83B7;&#x53D6;&#x6570;&#x7EC4;&#x968F;&#x673A;&#x5143;&#x7D20;"></a>&#x83B7;&#x53D6;&#x6570;&#x7EC4;&#x968F;&#x673A;&#x5143;&#x7D20;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#截取数组一段元素"><span class="nav-number">1.12.</span> <span class="nav-text"><a href="#&#x622A;&#x53D6;&#x6570;&#x7EC4;&#x4E00;&#x6BB5;&#x5143;&#x7D20;" class="headerlink" title="&#x622A;&#x53D6;&#x6570;&#x7EC4;&#x4E00;&#x6BB5;&#x5143;&#x7D20;"></a>&#x622A;&#x53D6;&#x6570;&#x7EC4;&#x4E00;&#x6BB5;&#x5143;&#x7D20;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建一个数组"><span class="nav-number">1.13.</span> <span class="nav-text"><a href="#&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;" class="headerlink" title="&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;"></a>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合并两个数组"><span class="nav-number">1.14.</span> <span class="nav-text"><a href="#&#x5408;&#x5E76;&#x4E24;&#x4E2A;&#x6570;&#x7EC4;" class="headerlink" title="&#x5408;&#x5E76;&#x4E24;&#x4E2A;&#x6570;&#x7EC4;"></a>&#x5408;&#x5E76;&#x4E24;&#x4E2A;&#x6570;&#x7EC4;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组求交集"><span class="nav-number">1.15.</span> <span class="nav-text"><a href="#&#x6570;&#x7EC4;&#x6C42;&#x4EA4;&#x96C6;" class="headerlink" title="&#x6570;&#x7EC4;&#x6C42;&#x4EA4;&#x96C6;"></a>&#x6570;&#x7EC4;&#x6C42;&#x4EA4;&#x96C6;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组求差集"><span class="nav-number">1.16.</span> <span class="nav-text"><a href="#&#x6570;&#x7EC4;&#x6C42;&#x5DEE;&#x96C6;" class="headerlink" title="&#x6570;&#x7EC4;&#x6C42;&#x5DEE;&#x96C6;"></a>&#x6570;&#x7EC4;&#x6C42;&#x5DEE;&#x96C6;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组排序（正序）"><span class="nav-number">1.17.</span> <span class="nav-text"><a href="#&#x6570;&#x7EC4;&#x6392;&#x5E8F;&#xFF08;&#x6B63;&#x5E8F;&#xFF09;" class="headerlink" title="&#x6570;&#x7EC4;&#x6392;&#x5E8F;&#xFF08;&#x6B63;&#x5E8F;&#xFF09;"></a>&#x6570;&#x7EC4;&#x6392;&#x5E8F;&#xFF08;&#x6B63;&#x5E8F;&#xFF09;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组排序（逆序）"><span class="nav-number">1.18.</span> <span class="nav-text"><a href="#&#x6570;&#x7EC4;&#x6392;&#x5E8F;&#xFF08;&#x9006;&#x5E8F;&#xFF09;" class="headerlink" title="&#x6570;&#x7EC4;&#x6392;&#x5E8F;&#xFF08;&#x9006;&#x5E8F;&#xFF09;"></a>&#x6570;&#x7EC4;&#x6392;&#x5E8F;&#xFF08;&#x9006;&#x5E8F;&#xFF09;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取数组的某一列"><span class="nav-number">1.19.</span> <span class="nav-text"><a href="#&#x83B7;&#x53D6;&#x6570;&#x7EC4;&#x7684;&#x67D0;&#x4E00;&#x5217;" class="headerlink" title="&#x83B7;&#x53D6;&#x6570;&#x7EC4;&#x7684;&#x67D0;&#x4E00;&#x5217;"></a>&#x83B7;&#x53D6;&#x6570;&#x7EC4;&#x7684;&#x67D0;&#x4E00;&#x5217;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串处理"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x5B57;&#x7B26;&#x4E32;&#x5904;&#x7406;" class="headerlink" title="&#x5B57;&#x7B26;&#x4E32;&#x5904;&#x7406;"></a>&#x5B57;&#x7B26;&#x4E32;&#x5904;&#x7406;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#求字符串长度"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x6C42;&#x5B57;&#x7B26;&#x4E32;&#x957F;&#x5EA6;" class="headerlink" title="&#x6C42;&#x5B57;&#x7B26;&#x4E32;&#x957F;&#x5EA6;"></a>&#x6C42;&#x5B57;&#x7B26;&#x4E32;&#x957F;&#x5EA6;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串分割"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#&#x5B57;&#x7B26;&#x4E32;&#x5206;&#x5272;" class="headerlink" title="&#x5B57;&#x7B26;&#x4E32;&#x5206;&#x5272;"></a>&#x5B57;&#x7B26;&#x4E32;&#x5206;&#x5272;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一维数组变字符串"><span class="nav-number">2.3.</span> <span class="nav-text"><a href="#&#x4E00;&#x7EF4;&#x6570;&#x7EC4;&#x53D8;&#x5B57;&#x7B26;&#x4E32;" class="headerlink" title="&#x4E00;&#x7EF4;&#x6570;&#x7EC4;&#x53D8;&#x5B57;&#x7B26;&#x4E32;"></a>&#x4E00;&#x7EF4;&#x6570;&#x7EC4;&#x53D8;&#x5B57;&#x7B26;&#x4E32;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#除去字符串首尾处空白"><span class="nav-number">2.4.</span> <span class="nav-text"><a href="#&#x9664;&#x53BB;&#x5B57;&#x7B26;&#x4E32;&#x9996;&#x5C3E;&#x5904;&#x7A7A;&#x767D;" class="headerlink" title="&#x9664;&#x53BB;&#x5B57;&#x7B26;&#x4E32;&#x9996;&#x5C3E;&#x5904;&#x7A7A;&#x767D;"></a>&#x9664;&#x53BB;&#x5B57;&#x7B26;&#x4E32;&#x9996;&#x5C3E;&#x5904;&#x7A7A;&#x767D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换"><span class="nav-number">2.5.</span> <span class="nav-text"><a href="#&#x66FF;&#x6362;" class="headerlink" title="&#x66FF;&#x6362;"></a>&#x66FF;&#x6362;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串重复"><span class="nav-number">2.6.</span> <span class="nav-text"><a href="#&#x5B57;&#x7B26;&#x4E32;&#x91CD;&#x590D;" class="headerlink" title="&#x5B57;&#x7B26;&#x4E32;&#x91CD;&#x590D;"></a>&#x5B57;&#x7B26;&#x4E32;&#x91CD;&#x590D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串切割转数组"><span class="nav-number">2.7.</span> <span class="nav-text"><a href="#&#x5B57;&#x7B26;&#x4E32;&#x5207;&#x5272;&#x8F6C;&#x6570;&#x7EC4;" class="headerlink" title="&#x5B57;&#x7B26;&#x4E32;&#x5207;&#x5272;&#x8F6C;&#x6570;&#x7EC4;"></a>&#x5B57;&#x7B26;&#x4E32;&#x5207;&#x5272;&#x8F6C;&#x6570;&#x7EC4;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算字符串中个字符信息"><span class="nav-number">2.8.</span> <span class="nav-text"><a href="#&#x8BA1;&#x7B97;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x4E2A;&#x5B57;&#x7B26;&#x4FE1;&#x606F;" class="headerlink" title="&#x8BA1;&#x7B97;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x4E2A;&#x5B57;&#x7B26;&#x4FE1;&#x606F;"></a>&#x8BA1;&#x7B97;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x4E2A;&#x5B57;&#x7B26;&#x4FE1;&#x606F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取字符串中某个字串首次出现的位置"><span class="nav-number">2.9.</span> <span class="nav-text"><a href="#&#x83B7;&#x53D6;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x67D0;&#x4E2A;&#x5B57;&#x4E32;&#x9996;&#x6B21;&#x51FA;&#x73B0;&#x7684;&#x4F4D;&#x7F6E;" class="headerlink" title="&#x83B7;&#x53D6;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x67D0;&#x4E2A;&#x5B57;&#x4E32;&#x9996;&#x6B21;&#x51FA;&#x73B0;&#x7684;&#x4F4D;&#x7F6E;"></a>&#x83B7;&#x53D6;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x67D0;&#x4E2A;&#x5B57;&#x4E32;&#x9996;&#x6B21;&#x51FA;&#x73B0;&#x7684;&#x4F4D;&#x7F6E;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取字符串的子串"><span class="nav-number">2.10.</span> <span class="nav-text"><a href="#&#x83B7;&#x53D6;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x5B50;&#x4E32;" class="headerlink" title="&#x83B7;&#x53D6;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x5B50;&#x4E32;"></a>&#x83B7;&#x53D6;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x5B50;&#x4E32;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串转小写"><span class="nav-number">2.11.</span> <span class="nav-text"><a href="#&#x5B57;&#x7B26;&#x4E32;&#x8F6C;&#x5C0F;&#x5199;" class="headerlink" title="&#x5B57;&#x7B26;&#x4E32;&#x8F6C;&#x5C0F;&#x5199;"></a>&#x5B57;&#x7B26;&#x4E32;&#x8F6C;&#x5C0F;&#x5199;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串转大写"><span class="nav-number">2.12.</span> <span class="nav-text"><a href="#&#x5B57;&#x7B26;&#x4E32;&#x8F6C;&#x5927;&#x5199;" class="headerlink" title="&#x5B57;&#x7B26;&#x4E32;&#x8F6C;&#x5927;&#x5199;"></a>&#x5B57;&#x7B26;&#x4E32;&#x8F6C;&#x5927;&#x5199;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊字符转html实体"><span class="nav-number">2.13.</span> <span class="nav-text"><a href="#&#x7279;&#x6B8A;&#x5B57;&#x7B26;&#x8F6C;html&#x5B9E;&#x4F53;" class="headerlink" title="&#x7279;&#x6B8A;&#x5B57;&#x7B26;&#x8F6C;html&#x5B9E;&#x4F53;"></a>&#x7279;&#x6B8A;&#x5B57;&#x7B26;&#x8F6C;html&#x5B9E;&#x4F53;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串转义"><span class="nav-number">2.14.</span> <span class="nav-text"><a href="#&#x5B57;&#x7B26;&#x4E32;&#x8F6C;&#x4E49;" class="headerlink" title="&#x5B57;&#x7B26;&#x4E32;&#x8F6C;&#x4E49;"></a>&#x5B57;&#x7B26;&#x4E32;&#x8F6C;&#x4E49;</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">赤乌_Rsun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("xTWceCngiBeXoxFk2kI9uEKa-gzGzoHsz", "hmwNldeNXMKRLdv22HNu8faz");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="计算机网络," />
 
 
 
@@ -94,17 +94,18 @@
 
 
 
-<meta name="description" content="系统运行过程中难免会有一些常驻进程帮助我们处理一些业务逻辑，类似消费者进程或者服务程序。我们通常通过nohup 的方式来启动并在后台运行这个进程，如需更好的管理和监测这类进程，需要用到Supervisor 来对这种常驻进程进行监测管理。 简介supervisor 是用Python开发的一套通用的进程管理程序，可以将一个进程变为后台daemon，并监控进程状态，如果进程出现异常，可自动重启。 安装1">
+<meta name="description" content="概述网络协议通常分不同层次开发，每一层负责不同的通信功能。TCP/IP其实是一个四层协议族，由上到下可分为应用层（Telent，FTP，e-mail）；运输层（TCP，UDP）；网络层（IP，ICMP，IGMP）；链路层（设备驱动卡程序及接口卡）。 数据链路层：操作程序中的设备驱动卡程序和计算机中对应的网络接口卡，包括ARP（地址解析协议）和RARP（逆地址解析协议），用来转化IP层和网络接口层的">
+<meta name="keywords" content="计算机网络">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Supervisor 进程管理">
-<meta property="og:url" content="http://jixianma.com/2017/12/17/Supversior/index.html">
+<meta property="og:title" content="TCP&#x2F;IP卷学习笔记之概述篇">
+<meta property="og:url" content="http://jixianma.com/2018/01/01/Tcp_ip_first/index.html">
 <meta property="og:site_name" content="赤乌_Run的博客">
-<meta property="og:description" content="系统运行过程中难免会有一些常驻进程帮助我们处理一些业务逻辑，类似消费者进程或者服务程序。我们通常通过nohup 的方式来启动并在后台运行这个进程，如需更好的管理和监测这类进程，需要用到Supervisor 来对这种常驻进程进行监测管理。 简介supervisor 是用Python开发的一套通用的进程管理程序，可以将一个进程变为后台daemon，并监控进程状态，如果进程出现异常，可自动重启。 安装1">
+<meta property="og:description" content="概述网络协议通常分不同层次开发，每一层负责不同的通信功能。TCP/IP其实是一个四层协议族，由上到下可分为应用层（Telent，FTP，e-mail）；运输层（TCP，UDP）；网络层（IP，ICMP，IGMP）；链路层（设备驱动卡程序及接口卡）。 数据链路层：操作程序中的设备驱动卡程序和计算机中对应的网络接口卡，包括ARP（地址解析协议）和RARP（逆地址解析协议），用来转化IP层和网络接口层的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-26T02:44:12.000Z">
+<meta property="og:updated_time" content="2018-03-12T09:01:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Supervisor 进程管理">
-<meta name="twitter:description" content="系统运行过程中难免会有一些常驻进程帮助我们处理一些业务逻辑，类似消费者进程或者服务程序。我们通常通过nohup 的方式来启动并在后台运行这个进程，如需更好的管理和监测这类进程，需要用到Supervisor 来对这种常驻进程进行监测管理。 简介supervisor 是用Python开发的一套通用的进程管理程序，可以将一个进程变为后台daemon，并监控进程状态，如果进程出现异常，可自动重启。 安装1">
+<meta name="twitter:title" content="TCP&#x2F;IP卷学习笔记之概述篇">
+<meta name="twitter:description" content="概述网络协议通常分不同层次开发，每一层负责不同的通信功能。TCP/IP其实是一个四层协议族，由上到下可分为应用层（Telent，FTP，e-mail）；运输层（TCP，UDP）；网络层（IP，ICMP，IGMP）；链路层（设备驱动卡程序及接口卡）。 数据链路层：操作程序中的设备驱动卡程序和计算机中对应的网络接口卡，包括ARP（地址解析协议）和RARP（逆地址解析协议），用来转化IP层和网络接口层的">
 
 
 
@@ -133,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://jixianma.com/2017/12/17/Supversior/"/>
+  <link rel="canonical" href="http://jixianma.com/2018/01/01/Tcp_ip_first/"/>
 
 
 
 
 
-  <title>Supervisor 进程管理 | 赤乌_Run的博客</title>
+  <title>TCP/IP卷学习笔记之概述篇 | 赤乌_Run的博客</title>
   
 
 
@@ -272,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jixianma.com/2017/12/17/Supversior/">
+    <link itemprop="mainEntityOfPage" href="http://jixianma.com/2018/01/01/Tcp_ip_first/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="赤乌_Rsun">
@@ -289,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Supervisor 进程管理</h1>
+          <h1 class="post-title" itemprop="name headline">TCP/IP卷学习笔记之概述篇</h1>
         
 
         <div class="post-meta">
@@ -301,8 +302,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-17T12:00:00+08:00">
-                2017-12-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-01T18:27:47+08:00">
+                2018-01-01
               </time>
             
 
@@ -319,7 +320,7 @@
 
           
           
-             <span id="/2017/12/17/Supversior/" class="leancloud_visitors" data-flag-title="Supervisor 进程管理">
+             <span id="/2018/01/01/Tcp_ip_first/" class="leancloud_visitors" data-flag-title="TCP/IP卷学习笔记之概述篇">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -350,29 +351,14 @@
       
 
       
-        <p>系统运行过程中难免会有一些常驻进程帮助我们处理一些业务逻辑，类似消费者进程或者服务程序。我们通常通过nohup 的方式来启动并在后台运行这个进程，如需更好的管理和监测这类进程，需要用到Supervisor 来对这种常驻进程进行监测管理。</p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>supervisor 是用Python开发的一套通用的进程管理程序，可以将一个进程变为后台daemon，并监控进程状态，如果进程出现异常，可自动重启。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install supervisor</span><br></pre></td></tr></table></figure>
-<p>注：Centos下安装</p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="配置全局信息"><a href="#配置全局信息" class="headerlink" title="配置全局信息"></a>配置全局信息</h3><p>安装完成后，可在 /etc 下看到 supervisor.conf 这个文件，如下是该文件部分内容（需要简单配置的）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">[unix_http_server]</span><br><span class="line">file=/tmp/supervisor.sock   ; UNIX socket 文件，supervisorctl 会使用</span><br><span class="line">;chmod=0700                 ; socket 文件的 mode，默认是 0700</span><br><span class="line">;chown=nobody:nogroup       ; socket 文件的 owner，格式： uid:gid</span><br><span class="line"> </span><br><span class="line">;[inet_http_server]         ; HTTP 服务器，提供 web 管理界面</span><br><span class="line">;port=127.0.0.1:9001        ; Web 管理后台运行的 IP 和端口，如果开放到公网，需要注意安全性</span><br><span class="line">;username=user              ; 登录管理后台的用户名</span><br><span class="line">;password=123               ; 登录管理后台的密码</span><br><span class="line"> </span><br><span class="line">[supervisord]</span><br><span class="line">logfile=/tmp/supervisord.log ; 日志文件，默认是 <span class="variable">$CWD</span>/supervisord.log</span><br><span class="line">logfile_maxbytes=50MB        ; 日志文件大小，超出会 rotate，默认 50MB</span><br><span class="line">logfile_backups=10           ; 日志文件保留备份数量默认 10</span><br><span class="line">loglevel=info                ; 日志级别，默认 info，其它: debug,warn,trace</span><br><span class="line">pidfile=/tmp/supervisord.pid ; pid 文件</span><br><span class="line">nodaemon=<span class="literal">false</span>               ; 是否在前台启动，默认是 <span class="literal">false</span>，即以 daemon 的方式启动</span><br><span class="line">minfds=1024                  ; 可以打开的文件描述符的最小值，默认 1024</span><br><span class="line">minprocs=200                 ; 可以打开的进程数的最小值，默认 200</span><br><span class="line"> </span><br><span class="line">; the below section must remain <span class="keyword">in</span> the config file <span class="keyword">for</span> RPC</span><br><span class="line">; (supervisorctl/web interface) to work, additional interfaces may be</span><br><span class="line">; added by defining them <span class="keyword">in</span> separate rpcinterface: sections</span><br><span class="line">[rpcinterface:supervisor]</span><br><span class="line">supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface</span><br><span class="line"> </span><br><span class="line">[supervisorctl]</span><br><span class="line">serverurl=unix:///tmp/supervisor.sock ; 通过 UNIX socket 连接 supervisord，路径与 unix_http_server 部分的 file 一致</span><br><span class="line">;serverurl=http://127.0.0.1:9001 ; 通过 HTTP 的方式连接 supervisord</span><br><span class="line"> </span><br><span class="line">; 包含其他的配置文件</span><br><span class="line">[include]</span><br><span class="line">files = relative/directory/*.ini    ; 可以是 *.conf 或 *.ini</span><br></pre></td></tr></table></figure>
-<h3 id="配置不同的进程管理"><a href="#配置不同的进程管理" class="headerlink" title="配置不同的进程管理"></a>配置不同的进程管理</h3><p>从上面的配置文件中我们看到有</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[include]</span><br><span class="line">files = relative/directory/*.ini    ; 可以是 *.conf 或 *.ini</span><br></pre></td></tr></table></figure>
-<p>我们可以新建 <code>/etc/supervisor.d</code> 文件夹，将不同的项目启动配置放在里面。</p>
-<p>新建a.conf，内容如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[program:monitor_cron_master]</span><br><span class="line"><span class="built_in">command</span>=sh /xxx/xxx/xxx/xxx/supervisor_monitor.sh</span><br><span class="line"></span><br><span class="line">autostart = <span class="literal">true</span>     ; 在 supervisord 启动的时候也自动启动</span><br><span class="line">startsecs = 5        ; 启动 5 秒后没有异常退出，就当作已经正常启动了</span><br><span class="line">autorestart = <span class="literal">true</span>   ; 程序异常退出后自动重启</span><br><span class="line">startretries = 3     ; 启动失败自动重试次数，默认是 3</span><br><span class="line">user = root          ; 用哪个用户启动</span><br><span class="line">redirect_stderr = <span class="literal">true</span>  ; 把 stderr 重定向到 stdout，默认 <span class="literal">false</span></span><br><span class="line">stdout_logfile = /xxx/xxx/xxx/monitor_cron_master.log</span><br></pre></td></tr></table></figure>
-<p>注意：我们可能在代码编写过程中没有注意到程序运行中的一些相对路径的依赖，这样command 配置有可能变成</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /xxx/xxx/xxx &amp;&amp; sh a.sh</span><br></pre></td></tr></table></figure>
-<p>command 是不支持这种配置方式的，在这种情况下我们可把这个命令放到一个shell 文件中，用shell 来启动管理程序。</p>
-<h2 id="启动监控"><a href="#启动监控" class="headerlink" title="启动监控"></a>启动监控</h2><h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service supervisord start</span><br></pre></td></tr></table></figure>
-<p>注：修改 <code>/etc/supervisord.conf</code>  之后需要重启服务才可生效</p>
-<h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">supervisorctl status</span><br><span class="line"></span><br><span class="line">monitor_cron_master              RUNNING   pid 6766, uptime 5 days, 15:39:11</span><br></pre></td></tr></table></figure>
-<p>可以看到进程的状态时间等信息</p>
-<h3 id="重启暂停"><a href="#重启暂停" class="headerlink" title="重启暂停"></a>重启暂停</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">supervisorctl restart monitor_cron_master</span><br><span class="line">supervisorctl stop monitor_cron_master</span><br></pre></td></tr></table></figure>
-<h3 id="添加进程管理"><a href="#添加进程管理" class="headerlink" title="添加进程管理"></a>添加进程管理</h3><p> 在 <code>/etc/supervisor.d</code> 下配置文件之后</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">supervisorctl reread</span><br></pre></td></tr></table></figure>
-<p> 这个命令只影响新增的配置，不会影响之前运行中的状态，执行下面的操作即可查看</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">supervisorctl update</span><br></pre></td></tr></table></figure>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>网络协议通常分不同层次开发，每一层负责不同的通信功能。TCP/IP其实是一个四层协议族，由上到下可分为应用层（Telent，FTP，e-mail）；运输层（TCP，UDP）；网络层（IP，ICMP，IGMP）；链路层（设备驱动卡程序及接口卡）。</p>
+<p>数据链路层：操作程序中的设备驱动卡程序和计算机中对应的网络接口卡，包括ARP（地址解析协议）和RARP（逆地址解析协议），用来转化IP层和网络接口层的使用的地址。<br>网络层：处理分组在网络中的活动，如分组的选路。包括IP（网际协议，网络层主要协议，被TCP和UDP使用，TCP和UDP的每组数据数据都通过端系统和每个中间路由器的IP层在互联网中进行传输）、ICMP（Internet互联网控制报文协议，IP协议的附属协议，IP层用它来和其他主机或路由器交换错误信息和其他重要信息）、IGMP（Internet互联网组管理协议，用来把一个UDP数据报广播到多个主机）。<br>运输层：为两台主机上的应用程序提供端到端的通信。TCP（传输控制协议，提供高可靠新的数据通信），UDP（用户数据报协议，只是把称作数据报的分组从一台主机发送到另一台主机，不保证数据能到达另一端，一个数据报是指从发送发传输到接收方的一个信息单元）。<br>应用层：FTP，Telnet等。</p>
+<p>在TCP/IP协议族中，网络层IP提供了一种不可靠的服务，它是尽可能快的把分组从源节点发送到目的节点，TCP在不可靠的IP层提供了一个可靠地传输层（超时重发、接收端到端的确认和分组机制）。</p>
+<p>互联网的地址：互联网上的每个接口必须有一个唯一的Internet地址（也称作IP地址），长32bit，IP地址具有一定的结构，五类不同地址格式如下：</p>
+<p>A类： 0.0.0.0   到 127.255.255.255<br>B类： 128.0.0.0 到 191.255.255.255<br>C类： 192.0.0.0 到 223.255.255.255<br>D类   224.0.0.0 到 247.255.255.255</p>
+<p>这些32位的地址通常写成四个十进制数，每个整数对应一个字节，我们称其为点分十进制表示法。</p>
+<p>有三类IP地址，单播地址（目的为单个主机）、广播地址（目的端为给定网络上的所有主机）、多播地址（目的端位同一组内所有主机）</p>
+<p>//待续<br>域名系统：</p>
 
       
     </div>
@@ -412,6 +398,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/计算机网络/" rel="tag"># 计算机网络</a>
+          
+        </div>
+      
 
       
       
@@ -421,8 +413,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/15/Leetcode_twoSum/" rel="next" title="LT1求数组下标">
-                <i class="fa fa-chevron-left"></i> LT1求数组下标
+              <a href="/2017/12/31/EndOf2017/" rel="next" title="年终总结">
+                <i class="fa fa-chevron-left"></i> 年终总结
               </a>
             
           </div>
@@ -431,8 +423,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/31/EndOf2017/" rel="prev" title="年终总结">
-                年终总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/01/PHP_summary/" rel="prev" title="PHP 基础知识汇总(数组字符串篇)">
+                PHP 基础知识汇总(数组字符串篇) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -593,7 +585,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x7B80;&#x4ECB;" class="headerlink" title="&#x7B80;&#x4ECB;"></a>&#x7B80;&#x4ECB;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x5B89;&#x88C5;" class="headerlink" title="&#x5B89;&#x88C5;"></a>&#x5B89;&#x88C5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x914D;&#x7F6E;" class="headerlink" title="&#x914D;&#x7F6E;"></a>&#x914D;&#x7F6E;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置全局信息"><span class="nav-number">3.1.</span> <span class="nav-text"><a href="#&#x914D;&#x7F6E;&#x5168;&#x5C40;&#x4FE1;&#x606F;" class="headerlink" title="&#x914D;&#x7F6E;&#x5168;&#x5C40;&#x4FE1;&#x606F;"></a>&#x914D;&#x7F6E;&#x5168;&#x5C40;&#x4FE1;&#x606F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置不同的进程管理"><span class="nav-number">3.2.</span> <span class="nav-text"><a href="#&#x914D;&#x7F6E;&#x4E0D;&#x540C;&#x7684;&#x8FDB;&#x7A0B;&#x7BA1;&#x7406;" class="headerlink" title="&#x914D;&#x7F6E;&#x4E0D;&#x540C;&#x7684;&#x8FDB;&#x7A0B;&#x7BA1;&#x7406;"></a>&#x914D;&#x7F6E;&#x4E0D;&#x540C;&#x7684;&#x8FDB;&#x7A0B;&#x7BA1;&#x7406;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动监控"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x542F;&#x52A8;&#x76D1;&#x63A7;" class="headerlink" title="&#x542F;&#x52A8;&#x76D1;&#x63A7;"></a>&#x542F;&#x52A8;&#x76D1;&#x63A7;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动服务"><span class="nav-number">4.1.</span> <span class="nav-text"><a href="#&#x542F;&#x52A8;&#x670D;&#x52A1;" class="headerlink" title="&#x542F;&#x52A8;&#x670D;&#x52A1;"></a>&#x542F;&#x52A8;&#x670D;&#x52A1;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看"><span class="nav-number">4.2.</span> <span class="nav-text"><a href="#&#x67E5;&#x770B;" class="headerlink" title="&#x67E5;&#x770B;"></a>&#x67E5;&#x770B;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重启暂停"><span class="nav-number">4.3.</span> <span class="nav-text"><a href="#&#x91CD;&#x542F;&#x6682;&#x505C;" class="headerlink" title="&#x91CD;&#x542F;&#x6682;&#x505C;"></a>&#x91CD;&#x542F;&#x6682;&#x505C;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加进程管理"><span class="nav-number">4.4.</span> <span class="nav-text"><a href="#&#x6DFB;&#x52A0;&#x8FDB;&#x7A0B;&#x7BA1;&#x7406;" class="headerlink" title="&#x6DFB;&#x52A0;&#x8FDB;&#x7A0B;&#x7BA1;&#x7406;"></a>&#x6DFB;&#x52A0;&#x8FDB;&#x7A0B;&#x7BA1;&#x7406;</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x6982;&#x8FF0;" class="headerlink" title="&#x6982;&#x8FF0;"></a>&#x6982;&#x8FF0;</span></a></li></ol></div>
             
 
           </div>
