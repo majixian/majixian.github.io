@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="PHP," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="PHP 基础知识汇总 本篇来简述正则表达式相关内容以及其在PHP中的使用场景及方法。 正则表达式是对字符串进行操作的一种逻辑公式，用一些特定的字符组合成一个规则字符串，即正则匹配模式。 ##示例 12345678$p = &apos;/apple/&apos;;$str = &apos;apple banna&apos;;if (preg_match($p, $str)) &amp;#123;    echo &apos;matched&apos;; &amp;#125;">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP 基础知识汇总之正则表达式">
+<meta property="og:url" content="http://jixianma.com/2018/01/20/PHP_regular_expression/index.html">
+<meta property="og:site_name" content="赤乌_Run的博客">
+<meta property="og:description" content="PHP 基础知识汇总 本篇来简述正则表达式相关内容以及其在PHP中的使用场景及方法。 正则表达式是对字符串进行操作的一种逻辑公式，用一些特定的字符组合成一个规则字符串，即正则匹配模式。 ##示例 12345678$p = &apos;/apple/&apos;;$str = &apos;apple banna&apos;;if (preg_match($p, $str)) &amp;#123;    echo &apos;matched&apos;; &amp;#125;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-15T02:18:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP 基础知识汇总之正则表达式">
+<meta name="twitter:description" content="PHP 基础知识汇总 本篇来简述正则表达式相关内容以及其在PHP中的使用场景及方法。 正则表达式是对字符串进行操作的一种逻辑公式，用一些特定的字符组合成一个规则字符串，即正则匹配模式。 ##示例 12345678$p = &apos;/apple/&apos;;$str = &apos;apple banna&apos;;if (preg_match($p, $str)) &amp;#123;    echo &apos;matched&apos;; &amp;#125;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jixianma.com/2018/01/20/PHP_regular_expression/"/>
+
+
+
+
+
+  <title>PHP 基础知识汇总之正则表达式 | 赤乌_Run的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">赤乌_Run的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于作者
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jixianma.com/2018/01/20/PHP_regular_expression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赤乌_Rsun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赤乌_Run的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PHP 基础知识汇总之正则表达式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-20T18:27:47+08:00">
+                2018-01-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/01/20/PHP_regular_expression/" class="leancloud_visitors" data-flag-title="PHP 基础知识汇总之正则表达式">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>PHP 基础知识汇总</p>
+<p>本篇来简述正则表达式相关内容以及其在PHP中的使用场景及方法。</p>
+<p>正则表达式是对字符串进行操作的一种逻辑公式，用一些特定的字符组合成一个规则字符串，即正则匹配模式。</p>
+<p>##示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$p</span> = <span class="string">'/apple/'</span>;</span><br><span class="line"><span class="variable">$str</span> = <span class="string">'apple banna'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (preg_match(<span class="variable">$p</span>, <span class="variable">$str</span>)) &#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">'matched'</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//结果输出 <span class="string">'matched'</span></span><br></pre></td></tr></table></figure>
+<p>preg_match() 函数用来执行匹配正则表达式，可以简单的用来判断模式是否匹配成功，或者取得一个匹配结果，他的返回值是匹配成功的次数0或者1，在匹配到1次以后就会停止搜索。该函数支持四个参数，如下：<br>preg_match($pattern, $str, $matches, $flag)，</p>
+<p>用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">preg_match(<span class="string">'/(foo)(bar)(baz)/'</span>, <span class="string">'foobarbaz'</span>, <span class="variable">$matches</span>, PREG_OFFSET_CAPTURE);</span><br><span class="line">print_r(<span class="variable">$matches</span>);</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] =&gt; Array</span><br><span class="line">        (</span><br><span class="line">            [0] =&gt; foobarbaz</span><br><span class="line">            [1] =&gt; 0</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    [1] =&gt; Array</span><br><span class="line">        (</span><br><span class="line">            [0] =&gt; foo</span><br><span class="line">            [1] =&gt; 0</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    [2] =&gt; Array</span><br><span class="line">        (</span><br><span class="line">            [0] =&gt; bar</span><br><span class="line">            [1] =&gt; 3</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    [3] =&gt; Array</span><br><span class="line">        (</span><br><span class="line">            [0] =&gt; baz</span><br><span class="line">            [1] =&gt; 6</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><p>正则匹配模式使用分隔符与元字符组成，分隔符可以是非数字，非反斜线，非空格的任意字符，经常使用的有 / # 和 ~ 三种，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/foo bar/</span><br><span class="line"><span class="comment">#asdfsd#</span></span><br><span class="line">~php~</span><br></pre></td></tr></table></figure>
+<p>正则表达式中具有特殊含义的字符称为元字符，常用的元字符有：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">\ 一般用于转义字符，比如查找匹配元字符，就需要用\对元字符转义</span><br><span class="line">^ 断言目标的开始位置(或在多行模式下是行首)</span><br><span class="line">$ 断言目标的结束位置(或在多行模式下是行尾)</span><br><span class="line">. 匹配除换行符外的任何字符(默认)</span><br><span class="line">[ 开始字符类定义</span><br><span class="line">] 结束字符类定义</span><br><span class="line"></span><br><span class="line">//分支条件</span><br><span class="line">| 开始一个可选分支</span><br><span class="line"></span><br><span class="line">//分组</span><br><span class="line">( 子组的开始标记</span><br><span class="line">) 子组的结束标记</span><br><span class="line"></span><br><span class="line">//重复限定符</span><br><span class="line">? 作为量词，表示 0 次或 1 次匹配。位于量词后面用于改变量词的贪婪特性。 (查阅量词)</span><br><span class="line">* 量词，0 次或多次匹配</span><br><span class="line">+ 量词，1 次或多次匹配</span><br><span class="line">&#123; 自定义量词开始标记</span><br><span class="line">&#125; 自定义量词结束标记</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\w 匹配字母、数字、下划线或任意汉字</span><br><span class="line">\s 匹配任意字符</span><br><span class="line">\d 匹配数字</span><br><span class="line">\b 匹配单词的开始或结束</span><br></pre></td></tr></table></figure>
+<p>举个栗子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$p</span> = <span class="string">'/^我[^\s]+(苹果|香蕉)$/'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (preg_match(<span class="variable">$p</span>, <span class="string">'我喜欢吃香蕉'</span>)) &#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">'matched'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>元字符具有两种使用场景，一种是可以在任何地方都能使用，另一种是在方括号内使用，在方括号使用的有：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\ 转义字符</span><br><span class="line">^ 仅在作为第一个字符时，表明字符类取反</span><br><span class="line">- 标记字符范围</span><br></pre></td></tr></table></figure>
+<h2 id="反义"><a href="#反义" class="headerlink" title="反义"></a>反义</h2><p>有时候需要查找不属于某个能简单定义的字符类的字符，如想查找除了数字的其他字符，就会遇到反义，常用反义码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">\W 匹配任意不是字母，数字，下划线或者汉字的字符</span><br><span class="line"></span><br><span class="line">\S 匹配任意不是空白的字符</span><br><span class="line"></span><br><span class="line">\D 匹配任意非数字的字符</span><br><span class="line"></span><br><span class="line">\B 匹配不是单次开头或者结束的位置</span><br><span class="line"></span><br><span class="line">[\^x] 匹配除了x以外的任意字符</span><br><span class="line"></span><br><span class="line">[\^aeiou] 匹配除了aeiou这几个字母以外的任意字符</span><br></pre></td></tr></table></figure>
+<h2 id="向后引用"><a href="#向后引用" class="headerlink" title="向后引用"></a>向后引用</h2><p>使用小括号指定一个字表达式之后，匹配这个字表达式的文本可以在表达式或其他程序中作进一步处理，用于重复搜索前面某个分组匹配的文本每个分组都会有一个组号，从左到右，以分组的左括号为标志，第一个出现的分组的组好为1，第二个为2，依次类推。如，\1代表分组1匹配的结果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\b(\w+)\b\s+\1\b //可以匹配 go go 或者kitty kitty</span><br></pre></td></tr></table></figure>
+<h2 id="零宽断言"><a href="#零宽断言" class="headerlink" title="零宽断言"></a>零宽断言</h2><p>用于查找某些内容（但并不包括这些内容）之前或之后的东西，它们也像\b,\^,$一样用于指定一个位置，这个位置应该满足一定的条件，即断言</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(?=exp)</span><br></pre></td></tr></table></figure>
+<p>上面这种表达式能够断言自身出现位置的后面匹配表达式exp。如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\b\w+(?=ing\b)</span><br></pre></td></tr></table></figure>
+<p>这个表达式可以匹配任何以ing结尾的单次的前面部分，如果要匹配断言自身出现位置前面匹配表达式exp,则可用下面这种方式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(?&lt;=exp)</span><br><span class="line"></span><br><span class="line">(?&lt;=\bre)\w+\b //会匹配以re开头的后半部分，如在查找reading a book 的时候会匹配ading</span><br></pre></td></tr></table></figure>
+<h2 id="负向零宽断言"><a href="#负向零宽断言" class="headerlink" title="负向零宽断言"></a>负向零宽断言</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(?!exp)</span><br></pre></td></tr></table></figure>
+<p>如果我们只是想要确保某个字符没有出现，但并不想去匹配它。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\b\w*q[^u]\w*\b</span><br><span class="line">//匹配以q开头后面跟的不是u的单词，如果单词结尾是q则会出错，[^u]需要匹配一个字符</span><br></pre></td></tr></table></figure>
+<p>负向零宽断言只匹配一个位置并不消费任何字符。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\b\w*q(?!u)\w*\b //可解决上面的问题</span><br></pre></td></tr></table></figure>
+<h2 id="贪婪模式和懒惰模式"><a href="#贪婪模式和懒惰模式" class="headerlink" title="贪婪模式和懒惰模式"></a>贪婪模式和懒惰模式</h2><p>正则表达式中每个字符匹配一个字符，当使用+之后将会变得贪婪，将尽可能匹配多的字符，当使用？时则尽可能匹配少的字符。</p>
+<p>贪婪模式在可匹配与不可匹配的时候优先匹配，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$p</span> = <span class="string">'/\d+\-\d+/'</span>;</span><br><span class="line"><span class="variable">$str</span> = <span class="string">'我的电话是010-1231231'</span>;</span><br><span class="line">preg_match(<span class="variable">$p</span>, <span class="variable">$str</span>, <span class="variable">$matches</span>);</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$matches</span>[0]; //010-1231231</span><br></pre></td></tr></table></figure>
+<p>懒惰模式在可匹配与不可匹配的时候优先不匹配</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$p</span> = <span class="string">'/\d+\-\d+/'</span>;</span><br><span class="line"><span class="variable">$str</span> = <span class="string">'我的电话是010-1231231'</span>;</span><br><span class="line">preg_match(<span class="variable">$p</span>, <span class="variable">$str</span>, <span class="variable">$matches</span>);</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$matches</span>[0]; //0-1</span><br></pre></td></tr></table></figure>
+<p>当我们确切的知道匹配的字符产妇的时候，可以使用{}指定匹配字符数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$p</span> = <span class="string">'/\d&#123;3&#125;\-\d&#123;8&#125;/'</span>;</span><br><span class="line"><span class="variable">$str</span> = <span class="string">'我的电话是010-12312312'</span>;</span><br><span class="line">preg_match(<span class="variable">$p</span>, <span class="variable">$str</span>, <span class="variable">$matches</span>);</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$matches</span>[0]; //010-12312312</span><br></pre></td></tr></table></figure>
+<h2 id="使用正则表达式进行匹配"><a href="#使用正则表达式进行匹配" class="headerlink" title="使用正则表达式进行匹配"></a>使用正则表达式进行匹配</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$subject</span> = <span class="string">"abcdef"</span>;</span><br><span class="line"><span class="variable">$pattern</span> = <span class="string">'/a(.*?)d/'</span>;</span><br><span class="line">preg_match(<span class="variable">$pattern</span>, <span class="variable">$subject</span>, <span class="variable">$matches</span>);</span><br><span class="line">print_r(<span class="variable">$matches</span>); //结果为：Array ( [0] =&gt; abcd [1] =&gt; bc )</span><br></pre></td></tr></table></figure>
+<p>查找所有匹配结果，preg_match() 函数只能匹配一次结果，可以用preg_match_all()循环获取一个列表的匹配结果数组，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$p</span> = <span class="string">"|&lt;[^&gt;]+&gt;(.*?)&lt;/[^&gt;]+&gt;|i"</span>;</span><br><span class="line"><span class="variable">$str</span> = <span class="string">"&lt;b&gt;example: &lt;/b&gt;&lt;div align=left&gt;this is a test&lt;/div&gt;"</span>;</span><br><span class="line">preg_match_all(<span class="variable">$p</span>, <span class="variable">$str</span>, <span class="variable">$matches</span>);</span><br><span class="line">print_r(<span class="variable">$matches</span>);</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] =&gt; Array</span><br><span class="line">        (</span><br><span class="line">            [0] =&gt; &lt;b&gt;example: &lt;/b&gt;</span><br><span class="line">            [1] =&gt; &lt;div align=left&gt;this is a <span class="built_in">test</span>&lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    [1] =&gt; Array</span><br><span class="line">        (</span><br><span class="line">            [0] =&gt; example:</span><br><span class="line">            [1] =&gt; this is a <span class="built_in">test</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<h2 id="正则表达式的搜索和替换"><a href="#正则表达式的搜索和替换" class="headerlink" title="正则表达式的搜索和替换"></a>正则表达式的搜索和替换</h2><p>preg_replace() 函数用来正则替换，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$string</span> = <span class="string">'April 15, 2014'</span>;</span><br><span class="line"><span class="variable">$pattern</span> = <span class="string">'/(\w+) (\d+), (\d+)/i'</span>;</span><br><span class="line"><span class="variable">$replacement</span> = <span class="string">'$3, $&#123;1&#125; $2'</span>;</span><br><span class="line"><span class="built_in">echo</span> preg_replace(<span class="variable">$pattern</span>, <span class="variable">$replacement</span>, <span class="variable">$string</span>); //结果为：2014, April 15</span><br></pre></td></tr></table></figure>
+<h2 id="一些简单的使用"><a href="#一些简单的使用" class="headerlink" title="一些简单的使用"></a>一些简单的使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">^\d&#123;5,12&#125;$  //匹配5到12个数字</span><br><span class="line"></span><br><span class="line">0\d&#123;3&#125;-\d&#123;8&#125;|0\d&#123;4&#125;-\d&#123;7&#125; //匹配010-12345678或者是0932-6827220</span><br><span class="line"></span><br><span class="line">\(?0\d&#123;2&#125;\)?[- ]?\d&#123;8&#125;|0\d&#123;2&#125;[- ]?\d&#123;8&#125; //匹配(010)-12345678</span><br><span class="line"></span><br><span class="line">(\d&#123;2,3&#125;\.)&#123;3&#125;\d&#123;3&#125; //匹配IP格式</span><br><span class="line"></span><br><span class="line">((2[0-4]\d|25[0-5]|[01]?\d\d?)\.)&#123;3&#125;(2[0-4]\d|25[0-5]|[01]?\d\d?) //IP格式精确匹配</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>岂曰无衣，与子同袍</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="赤乌_Rsun WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/15/PHP_summary/" rel="next" title="PHP 基础知识汇总(数组字符串篇)">
+                <i class="fa fa-chevron-left"></i> PHP 基础知识汇总(数组字符串篇)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="赤乌_Rsun" />
+          <p class="site-author-name" itemprop="name">赤乌_Rsun</p>
+           
+              <p class="site-description motion-element" itemprop="description">曾洒脱，误入漫途；渐入世，将军盟主；愁白头，未告别离</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/majixian" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://majixian620@gmail.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/2805271171/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本语法"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x57FA;&#x672C;&#x8BED;&#x6CD5;" class="headerlink" title="&#x57FA;&#x672C;&#x8BED;&#x6CD5;"></a>&#x57FA;&#x672C;&#x8BED;&#x6CD5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反义"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x53CD;&#x4E49;" class="headerlink" title="&#x53CD;&#x4E49;"></a>&#x53CD;&#x4E49;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向后引用"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x5411;&#x540E;&#x5F15;&#x7528;" class="headerlink" title="&#x5411;&#x540E;&#x5F15;&#x7528;"></a>&#x5411;&#x540E;&#x5F15;&#x7528;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#零宽断言"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x96F6;&#x5BBD;&#x65AD;&#x8A00;" class="headerlink" title="&#x96F6;&#x5BBD;&#x65AD;&#x8A00;"></a>&#x96F6;&#x5BBD;&#x65AD;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负向零宽断言"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x8D1F;&#x5411;&#x96F6;&#x5BBD;&#x65AD;&#x8A00;" class="headerlink" title="&#x8D1F;&#x5411;&#x96F6;&#x5BBD;&#x65AD;&#x8A00;"></a>&#x8D1F;&#x5411;&#x96F6;&#x5BBD;&#x65AD;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贪婪模式和懒惰模式"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x8D2A;&#x5A6A;&#x6A21;&#x5F0F;&#x548C;&#x61D2;&#x60F0;&#x6A21;&#x5F0F;" class="headerlink" title="&#x8D2A;&#x5A6A;&#x6A21;&#x5F0F;&#x548C;&#x61D2;&#x60F0;&#x6A21;&#x5F0F;"></a>&#x8D2A;&#x5A6A;&#x6A21;&#x5F0F;&#x548C;&#x61D2;&#x60F0;&#x6A21;&#x5F0F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用正则表达式进行匹配"><span class="nav-number">7.</span> <span class="nav-text"><a href="#&#x4F7F;&#x7528;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x8FDB;&#x884C;&#x5339;&#x914D;" class="headerlink" title="&#x4F7F;&#x7528;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x8FDB;&#x884C;&#x5339;&#x914D;"></a>&#x4F7F;&#x7528;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x8FDB;&#x884C;&#x5339;&#x914D;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式的搜索和替换"><span class="nav-number">8.</span> <span class="nav-text"><a href="#&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x641C;&#x7D22;&#x548C;&#x66FF;&#x6362;" class="headerlink" title="&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x641C;&#x7D22;&#x548C;&#x66FF;&#x6362;"></a>&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x641C;&#x7D22;&#x548C;&#x66FF;&#x6362;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些简单的使用"><span class="nav-number">9.</span> <span class="nav-text"><a href="#&#x4E00;&#x4E9B;&#x7B80;&#x5355;&#x7684;&#x4F7F;&#x7528;" class="headerlink" title="&#x4E00;&#x4E9B;&#x7B80;&#x5355;&#x7684;&#x4F7F;&#x7528;"></a>&#x4E00;&#x4E9B;&#x7B80;&#x5355;&#x7684;&#x4F7F;&#x7528;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">赤乌_Rsun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("xTWceCngiBeXoxFk2kI9uEKa-gzGzoHsz", "hmwNldeNXMKRLdv22HNu8faz");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
