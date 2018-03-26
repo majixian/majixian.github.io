@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="上篇文章我们简单介绍了grep，awk，sed三种常用的文本处理方式，今天我们来看看Linux下一些常用的命令。 Linux 下有一些用来查看系统进程，网络资源，系统负载等信息的命令 netstat命令主要用来显示各种网络相关信息，如网络连接，路由表，接口状态，masquerade连接，多播成员等等。 输出信息（截取部分） 1234567891011121314151617181920212223">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux常用命令">
+<meta property="og:url" content="http://jixianma.com/2018/01/25/LinuxCommand/index.html">
+<meta property="og:site_name" content="赤乌_Run的博客">
+<meta property="og:description" content="上篇文章我们简单介绍了grep，awk，sed三种常用的文本处理方式，今天我们来看看Linux下一些常用的命令。 Linux 下有一些用来查看系统进程，网络资源，系统负载等信息的命令 netstat命令主要用来显示各种网络相关信息，如网络连接，路由表，接口状态，masquerade连接，多播成员等等。 输出信息（截取部分） 1234567891011121314151617181920212223">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-26T07:24:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux常用命令">
+<meta name="twitter:description" content="上篇文章我们简单介绍了grep，awk，sed三种常用的文本处理方式，今天我们来看看Linux下一些常用的命令。 Linux 下有一些用来查看系统进程，网络资源，系统负载等信息的命令 netstat命令主要用来显示各种网络相关信息，如网络连接，路由表，接口状态，masquerade连接，多播成员等等。 输出信息（截取部分） 1234567891011121314151617181920212223">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jixianma.com/2018/01/25/LinuxCommand/"/>
+
+
+
+
+
+  <title>Linux常用命令 | 赤乌_Run的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">赤乌_Run的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于作者
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jixianma.com/2018/01/25/LinuxCommand/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赤乌_Rsun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赤乌_Run的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux常用命令</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-25T18:27:47+08:00">
+                2018-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/01/25/LinuxCommand/" class="leancloud_visitors" data-flag-title="Linux常用命令">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>上篇文章我们简单介绍了grep，awk，sed三种常用的文本处理方式，今天我们来看看Linux下一些常用的命令。</p>
+<p>Linux 下有一些用来查看系统进程，网络资源，系统负载等信息的命令</p>
+<h2 id="netstat命令"><a href="#netstat命令" class="headerlink" title="netstat命令"></a>netstat命令</h2><p>主要用来显示各种网络相关信息，如网络连接，路由表，接口状态，masquerade连接，多播成员等等。</p>
+<p>输出信息（截取部分）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Active Internet connections (w/o servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address               Foreign Address             State</span><br><span class="line">tcp        0      0 localhost:6380              localhost:51616             ESTABLISHED</span><br><span class="line">tcp        0      0 localhost:45398             localhost:metatude-mds      ESTABLISHED</span><br><span class="line">tcp        0      0 localhost:58372             localhost:27017             ESTABLISHED</span><br><span class="line">tcp        1      0 fd-qa-test05:35800          fd-qa-test05:8982           CLOSE_WAIT</span><br><span class="line">tcp        0      0 localhost:36666             localhost:metatude-mds      ESTABLISHED</span><br><span class="line">tcp        0      0 localhost:40102             localhost:6380              ESTABLISHED</span><br><span class="line">tcp        1      0 fd-qa-test05:47576          fd-qa-test05:8982           CLOSE_WAIT</span><br><span class="line">tcp        0      0 localhost:6380              localhost:57020             ESTABLISHED</span><br><span class="line">tcp        0      0 localhost:27017             localhost:59222             ESTABLISHED</span><br><span class="line">tcp        0      0 localhost:43972             localhost:6380              ESTABLISHED</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Active UNIX domain sockets (w/o servers)</span><br><span class="line">Proto RefCnt Flags       Type       State         I-Node Path</span><br><span class="line">unix  2      [ ]         DGRAM                    11928  @/org/freedesktop/hal/udev_event</span><br><span class="line">unix  2      [ ]         DGRAM                    9290   @/org/kernel/udev/udevd</span><br><span class="line">unix  3      [ ]         STREAM     CONNECTED     118878256</span><br><span class="line">unix  3      [ ]         STREAM     CONNECTED     118878255</span><br><span class="line">unix  3      [ ]         STREAM     CONNECTED     96422907</span><br><span class="line">unix  3      [ ]         STREAM     CONNECTED     96422906</span><br><span class="line">unix  2      [ ]         STREAM     CONNECTED     88547251</span><br><span class="line">unix  3      [ ]         STREAM     CONNECTED     88546995</span><br><span class="line">unix  3      [ ]         STREAM     CONNECTED     88546994</span><br></pre></td></tr></table></figure>
+<p>输出大概可分为两部分，第一部分我们可称作有源TCP连接，Recv-Q 和Send-Q是指接收队列和发送队列，一般为0，如果不为0，则表示正在堆积。<br>第二部分称作有源Unix域套接口，Proto显示连接所用的协议，RefCnt标示连接到本套接口上的进程号，Types显示套接口的类型，State显示套接口的类型，Path表示连接到套接口的其他进程使用的路径名。</p>
+<p>再来看看各状态说明：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">CLOSED          初始状态（无连接状态）</span><br><span class="line">LISTEN          侦听状态，等待远程机器连接</span><br><span class="line">SYN_SEND        TCP三次握手期间，主动端发送了SYN包后，进入SYN_SEND状态，等待对方的ACK包。</span><br><span class="line">SYN_RECEIVE     TCP三次握手期间，主动端收到了SYN包后，进入SYN_RECEIVE</span><br><span class="line">ESTABLISHED     完成TCP三次握手，主动端进入ESTABLISHED，TCP连接建立，可通信</span><br><span class="line"></span><br><span class="line">FIN_WAIT_1      四次挥手时，主动段发送FIN包，进入FIN_WAIT_1状态</span><br><span class="line">FIN_WAIT_2      四次挥手时，主动段接收ACK包，进入FIN_WAIT_2状态</span><br><span class="line">TIME_WAIT       四次挥手时，主动段发送了ACK包，进入TIME_WAIT,最多等待MSL时间，让被动端收到ACK包</span><br><span class="line">CLOSING         四次挥手时，主动关闭端发送FIN包，没收到ACK包，却受到FIN包，此时进入CLOSEING状态。</span><br><span class="line">CLOSE_WAIT      四次挥手时，被动端收到FIN包，进入CLOSE状态</span><br><span class="line">LAST_ACK        四次挥手时，被动关闭端收到FIN包后，进入LAST_ACK,等待对方ACK</span><br></pre></td></tr></table></figure></p>
+<p>常见参数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-a (all)显示所有选项，默认不显示LISTEN相关</span><br><span class="line">-t (tcp)仅显示tcp相关选项</span><br><span class="line">-u (udp)仅显示udp相关选项</span><br><span class="line">-n 拒绝显示别名，能显示数字的全部转化成数字。</span><br><span class="line">-l 仅列出有在 Listen (监听) 的服務状态</span><br><span class="line"></span><br><span class="line">-p 显示建立相关链接的程序名</span><br><span class="line">-r 显示路由信息，路由表</span><br><span class="line">-e 显示扩展信息，例如uid等</span><br><span class="line">-s 按各个协议进行统计</span><br><span class="line">-c 每隔一个固定时间，执行该netstat命令。</span><br></pre></td></tr></table></figure>
+<p>显示核心路由信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@fd-qa-test05 App]<span class="comment"># netstat -r</span></span><br><span class="line">Kernel IP routing table</span><br><span class="line">Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface</span><br><span class="line">10.33.107.0     *               255.255.255.0   U         0 0          0 eth0</span><br><span class="line">link-local      *               255.255.0.0     U         0 0          0 eth0</span><br><span class="line">default         10.33.107.1     0.0.0.0         UG        0 0          0 eth0</span><br><span class="line"></span><br><span class="line">[root@fd-qa-test05 App]<span class="comment"># netstat -rn</span></span><br><span class="line">Kernel IP routing table</span><br><span class="line">Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface</span><br><span class="line">10.33.107.0     0.0.0.0         255.255.255.0   U         0 0          0 eth0</span><br><span class="line">169.254.0.0     0.0.0.0         255.255.0.0     U         0 0          0 eth0</span><br><span class="line">0.0.0.0         10.33.107.1     0.0.0.0         UG        0 0          0 eth0</span><br></pre></td></tr></table></figure>
+<p>查找程序运行的端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@fd-qa-test05 App]<span class="comment"># netstat -ap  | grep ssh</span></span><br><span class="line">tcp        0      0 *:ssh                       *:*                         LISTEN      2100/sshd</span><br><span class="line">tcp        0      0 fd-qa-test05:ssh            10.33.71.152:50106          ESTABLISHED 20142/sshd</span><br><span class="line">tcp        0      0 fd-qa-test05:ssh            10.33.78.121:65170          ESTABLISHED 29311/sshd</span><br><span class="line">tcp        0      0 fd-qa-test05:ssh            10.10.8.28:50314            ESTABLISHED 9761/sshd</span><br><span class="line">unix  3      [ ]         STREAM     CONNECTED     119870234 29311/sshd</span><br><span class="line">unix  3      [ ]         STREAM     CONNECTED     119870233 29315/sshd</span><br><span class="line">unix  3      [ ]         STREAM     CONNECTED     88546995 9761/sshd</span><br><span class="line">unix  3      [ ]         STREAM     CONNECTED     88546994 9765/sshd</span><br><span class="line">unix  2      [ ]         DGRAM                    88546991 9761/sshd</span><br></pre></td></tr></table></figure>
+<p>查看连接某服务端口最多的IP地址：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -nat | grep <span class="string">"192.168.1.15:22"</span> |awk <span class="string">'&#123;print $5&#125;'</span>|awk -F: <span class="string">'&#123;print $1&#125;'</span>|sort|uniq -c|sort -nr|head -20</span><br></pre></td></tr></table></figure></p>
+<p>查看所有状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -nat |awk <span class="string">'&#123;print $6&#125;'</span></span><br></pre></td></tr></table></figure>
+<p>统计所有状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">netstat -nat |awk <span class="string">'&#123;a[$6]++;&#125;END&#123;for (i in a )print a[i] "," i&#125;'</span> | sort -rn</span><br><span class="line">492,TIME_WAIT</span><br><span class="line">385,ESTABLISHED</span><br><span class="line">91,LISTEN</span><br><span class="line">32,CLOSE_WAIT</span><br><span class="line">1,SYN_SENT</span><br><span class="line">1,Foreign</span><br><span class="line">1,established)</span><br><span class="line"></span><br><span class="line">netstat -nat |awk <span class="string">'&#123;print $6&#125;'</span>|sort|uniq -c|sort -rn //也可统计</span><br></pre></td></tr></table></figure>
+<p>例子扩展：通过nginx日志获取前十个访问IP</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'&#123;print $1&#125;'</span> access.log |sort|uniq -c|sort -nr|head -10</span><br></pre></td></tr></table></figure>
+<h2 id="top命令"><a href="#top命令" class="headerlink" title="top命令"></a>top命令</h2><p>top命令是一款性能测试工具，能投实时查看系统中各个进程的资源占用情况，类似Windows的任务管理器。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//下面5行是统计信息</span><br><span class="line">top - 12:01:33 up 48 days, 21:10,  4 users,  load average: 2.93, 2.87, 1.98 //load average 为系统负载，任务队列的平均长度，分别是1、5、15分钟前到现在的平均值</span><br><span class="line">Tasks: 606 total,   1 running, 603 sleeping,   2 stopped,   0 zombie        //进程信息</span><br><span class="line">Cpu(s):  0.2%us,  0.2%sy,  0.0%ni, 99.5%id,  0.2%wa,  0.0%hi,  0.0%si,  0.0%st //CPU使用相关信息</span><br><span class="line">Mem:  32820196k total, 22638296k used, 10181900k free,  1132944k buffers    //内存信息</span><br><span class="line">Swap:  8388604k total,   906308k used,  7482296k free,  6554148k cached</span><br><span class="line"></span><br><span class="line">//下面是各个进程的详细信息</span><br><span class="line">  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND</span><br><span class="line">25230 work      20   0  581m 195m 3756 S  1.3  0.6 885:59.29 mongod</span><br><span class="line">21320 root      20   0 15432 1684  960 R  0.7  0.0   0:00.06 top</span><br><span class="line"> 1723 root      20   0     0    0    0 S  0.3  0.0  15:09.40 kondemand/8</span><br><span class="line"> 7472 work      20   0 11.2g 1.1g 7068 S  0.3  3.5  83:41.58 java</span><br><span class="line"> 9826 work      20   0 12.9g 326m 7104 S  0.3  1.0 113:03.72 java</span><br><span class="line">26641 work      20   0 7502m 884m 3724 S  0.3  2.8 142:27.11 java</span><br><span class="line">29506 work      20   0 8194m 1.1g 7216 S  0.3  3.7 314:23.22 java</span><br><span class="line">    1 root      20   0 19364 1232 1000 S  0.0  0.0   1:19.71 init</span><br><span class="line">    2 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kthreadd</span><br><span class="line">    3 root      RT   0     0    0    0 S  0.0  0.0   0:16.14 migration/0</span><br></pre></td></tr></table></figure>
+<h2 id="df命令"><a href="#df命令" class="headerlink" title="df命令"></a>df命令</h2><p>df命令是用来检查linux服务器的文件系统的磁盘空间占用情况，可显示指定文件的可用空间</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">df </span><br><span class="line"></span><br><span class="line">Filesystem     1K-blocks      Used Available Use% Mounted on</span><br><span class="line">/dev/sda2       41153856  16748712  22307992  43% /</span><br><span class="line">tmpfs           16410096         0  16410096   0% /dev/shm</span><br><span class="line">/dev/sda1         487652     75404    386648  17% /boot</span><br><span class="line">/dev/sda5      910097044 295292976 568567092  35% /data0</span><br><span class="line"></span><br><span class="line">//便于阅读，可用df -h 来查看</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/sda2        40G   16G   22G  43% /</span><br><span class="line">tmpfs            16G     0   16G   0% /dev/shm</span><br><span class="line">/dev/sda1       477M   74M  378M  17% /boot</span><br><span class="line">/dev/sda5       868G  282G  543G  35% /data0</span><br></pre></td></tr></table></figure>
+<p>按照inode来查看 df -i，关于inode，更多可参考<a href="http://www.ruanyifeng.com/blog/2011/12/inode.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2011/12/inode.html</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Filesystem       Inodes   IUsed    IFree IUse% Mounted on</span><br><span class="line">/dev/sda2       2621440   91295  2530145    4% /</span><br><span class="line">tmpfs           4102524       1  4102523    1% /dev/shm</span><br><span class="line">/dev/sda1        128016      46   127970    1% /boot</span><br><span class="line">/dev/sda5      57802752 1354761 56447991    3% /data0</span><br></pre></td></tr></table></figure></p>
+<p>可用stat 来查看文件inode信息，如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">stat</span> a.txt</span><br><span class="line"></span><br><span class="line">  File: <span class="string">"a.txt"</span></span><br><span class="line">  Size: 42        	Blocks: 8          IO Block: 4096   普通文件</span><br><span class="line">Device: 802h/2050d	Inode: 524492      Links: 1</span><br><span class="line">Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)</span><br><span class="line">Access: 2017-09-13 11:46:32.186898879 +0800</span><br><span class="line">Modify: 2017-09-13 11:46:08.862898905 +0800</span><br><span class="line">Change: 2017-09-13 11:46:08.889898904 +0800</span><br></pre></td></tr></table></figure>
+<p>除了df命令，我们也可用du命令，du命令主要查看文件的存储信息</p>
+<h2 id="lsof命令"><a href="#lsof命令" class="headerlink" title="lsof命令"></a>lsof命令</h2><p>lsof用来列出当前系统打开的文件，一些情况下，我们删除了了某个超大的文件，但是通过df查看磁盘情况下并没有变化，是因为这个文件有可能被其他某个程序打开，我们可以通过这个命令来查看：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof | grep deleted</span><br></pre></td></tr></table></figure>
+<p>参数使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//列出某个程序进程打开的文件信息</span><br><span class="line">lsof -c mysql</span><br><span class="line"></span><br><span class="line">//列出网络连接</span><br><span class="line">lsof -i</span><br><span class="line"></span><br><span class="line">//列出谁在使用某个端口</span><br><span class="line">lsof -i :80</span><br></pre></td></tr></table></figure>
+<h2 id="sort命令"><a href="#sort命令" class="headerlink" title="sort命令"></a>sort命令</h2><p>sort 在linux下用来排序，将文件的每一行作为一个单位，相互比较。</p>
+<p>用法如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//排序去重</span><br><span class="line">sort -u </span><br><span class="line"></span><br><span class="line">//降序排, 默认是升序排</span><br><span class="line">sort -r </span><br><span class="line"></span><br><span class="line">// 按数值来排序</span><br><span class="line">sort -n</span><br></pre></td></tr></table></figure>
+<p>sort 通常和 uniq命令一起使用，uniq -c 用来去重，并且显示每个出现的次数</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>岂曰无衣，与子同袍</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="赤乌_Rsun WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/23/TextProcessing/" rel="next" title="文本处理">
+                <i class="fa fa-chevron-left"></i> 文本处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="赤乌_Rsun" />
+          <p class="site-author-name" itemprop="name">赤乌_Rsun</p>
+           
+              <p class="site-description motion-element" itemprop="description">曾洒脱，误入漫途；渐入世，将军盟主；愁白头，未告别离</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/majixian" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://majixian620@gmail.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/2805271171/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#netstat命令"><span class="nav-number">1.</span> <span class="nav-text"><a href="#netstat&#x547D;&#x4EE4;" class="headerlink" title="netstat&#x547D;&#x4EE4;"></a>netstat&#x547D;&#x4EE4;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#top命令"><span class="nav-number">2.</span> <span class="nav-text"><a href="#top&#x547D;&#x4EE4;" class="headerlink" title="top&#x547D;&#x4EE4;"></a>top&#x547D;&#x4EE4;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#df命令"><span class="nav-number">3.</span> <span class="nav-text"><a href="#df&#x547D;&#x4EE4;" class="headerlink" title="df&#x547D;&#x4EE4;"></a>df&#x547D;&#x4EE4;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lsof命令"><span class="nav-number">4.</span> <span class="nav-text"><a href="#lsof&#x547D;&#x4EE4;" class="headerlink" title="lsof&#x547D;&#x4EE4;"></a>lsof&#x547D;&#x4EE4;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort命令"><span class="nav-number">5.</span> <span class="nav-text"><a href="#sort&#x547D;&#x4EE4;" class="headerlink" title="sort&#x547D;&#x4EE4;"></a>sort&#x547D;&#x4EE4;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">赤乌_Rsun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("xTWceCngiBeXoxFk2kI9uEKa-gzGzoHsz", "hmwNldeNXMKRLdv22HNu8faz");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
